@@ -67,7 +67,7 @@ def export(session):
 
 
 def package():
-    paths = [ROOT / 'README']
+    paths = [ROOT / 'README', ROOT / '.clang-tidy', ROOT / '.clang-format']
     for required in (f'{SOURCE}/Makefile', f'{SOURCE}/branchprice.cpp', f'{AI}/README'):
         if not (ROOT / required).is_file():
             raise FileNotFoundError(f'Missing required submission file: {required}')

@@ -1,0 +1,12 @@
+Checks: >-
+  -*,
+  clang-analyzer-*,
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  performance-*,
+  -performance-avoid-endl,
+  modernize-use-nullptr
+WarningsAsErrors: ''
+HeaderFilterRegex: '(^|/)(src|codigo)/.*'
+SystemHeaders: false
+FormatStyle: file
