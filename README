@@ -1,0 +1,220 @@
+Bin Packing com Classes de Conflito — Projeto 2
+==============================================
+
+Implementação em C++17 do branch-and-price exigido por enunciado.pdf,
+partindo dos arquivos de projeto-template/.
+Os originais foram preservados; os fontes da entrega estão em src/.
+
+Estudo: docs/GUIA_DE_ESTUDO.md explica o algoritmo passo a passo, com provas,
+exemplos, roteiro de verificação e exercícios com respostas.
+
+COMPILAR E EXECUTAR
+
+Requer compilador C++17, GNU Make e Gurobi com licença válida para os PLs.
+Configuração padrão deste ambiente:
+
+    cd src
+    make
+    ./binpack -f ../testes/instancias/exemplo.txt -o /tmp/saida.txt -t 60
+    ./binpack -f ../testes/instancias/ryan_foster.txt -o /tmp/rf.txt -t 60 -r 42
+
+Para compilar e executar o exemplo com os parâmetros preenchidos:
+
+    make run
+
+Na área de trabalho, o comando também funciona a partir da raiz. No pacote
+extraído, execute-o em codigo/. Os padrões são INPUT=../testes/instancias/exemplo.txt,
+OUTPUT=../saida.txt, TIME=60 e SEED=1. Para personalizar (caminhos relativos
+são interpretados a partir de src/):
+
+    make run INPUT=../testes/instancias/ryan_foster.txt OUTPUT=../saida-rf.txt TIME=30 SEED=42
+
+A instalação e o nome da biblioteca são configuráveis, inclusive no Linux:
+
+    make GUROBI_HOME=/caminho/gurobi1302/linux64 GUROBI_LIB=gurobi130
+
+Se necessário, execute make clean antes de trocar de instalação/compilador.
+GUROBI_HOME também pode ser exportada no ambiente. O Makefile configura o
+rpath da biblioteca. A biblioteca C++ precisa ser compatível com o compilador.
+
+Parâmetros obrigatórios: -f entrada, -o saída, -t segundos (real, finito e >=0).
+-r semente é opcional, inteiro sem sinal de 32 bits, padrão 1. A semente controla
+as duas heurísticas. Sem interrupção por tempo, a execução é determinística
+para a mesma instalação. Perto do limite, a quantidade de trabalho pode variar.
+
+A saída segue a seção 9.3: valor da incumbente, limitante inferior inteiro,
+número de recipientes e uma linha de itens por recipiente, com comentários #.
+Os itens são numerados a partir de 1. O programa verifica a partição, cargas
+e conflitos antes de gravá-la. O log vai para stdout, os erros para stderr.
+Se LB=UB, o ótimo está certificado; se LB<UB, existe uma lacuna ainda aberta.
+O exemplo retorna valor 4 e limitante 4.
+
+ARQUIVOS E ALGORITMO
+
+src/main.cpp: leitor/verificador/gravador do código-base, com validação de
+números, tempo, semente e remoção de repetições nas classes. Classes vazias,
+sobrepostas e descrições com mais ocorrências que n são aceitas, desde que os
+índices sejam válidos. A contagem de uma classe refere-se às ocorrências lidas.
+
+src/binpacking.h: estrutura original de entrada e solução. O cálculo da
+cota de volume e a validação de cargas foram ajustados para evitar overflow.
+
+src/binpacksolver.cpp: mantém a prioridade probabilística e o First Fit
+com conflitos fornecidos. Até 1000 rodadas, usando no máximo 5% do orçamento
+(limitado a 0,25 s), produzem a incumbente inicial. Um empacotamento unitário
+é instalado antes da heurística, inclusive para T=0. As colunas da melhor
+solução da heurística são usadas para inicializar o mestre.
+
+src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
+
+1. Formulação: min soma_B x_B, soma_{B contendo i} x_B = 1 para cada item.
+   O algoritmo resolve relaxações com x_B >= 0. Somente variáveis CONTÍNUAS
+   são criadas no Gurobi; nenhuma chamada ao MIP é usada. O solver usa dual
+   simplex, uma thread, tolerâncias primal/dual 1e-9 e reotimização incremental.
+
+2. Grupos: componentes das decisões "juntos" são contraídas por union-find.
+   Tamanhos são somados e conflitos originais/decisões "separados" são
+   transportados para os grupos. Um grupo que excede C ou contém conflito
+   torna o nó inviável. O mestre tem uma igualdade por grupo. Cada grupo
+   sozinho garante viabilidade, sem artificiais nem penalizações Big-M.
+
+3. Colunas: banco global de conjuntos ordenados de itens, sem duplicatas.
+   Cada nó reutiliza apenas colunas que incluem os grupos por inteiro e
+   respeitam seus conflitos. Acrescenta também as colunas unitárias dos
+   grupos. Um conjunto local evita duplicar colunas no mesmo mestre.
+
+4. Pricing heurístico PRIMEIRO: 12 ordens gulosas, usando valor dual/tamanho,
+   valor dual e embaralhamentos. Grupos com dual positivo são inseridos se
+   couberem e não conflitarem. Somente colunas com soma dual > 1+1e-7 entram.
+   Os duais das igualdades são livres; grupos não positivos podem ser
+   descartados no pricing porque a remoção preserva a validade do recipiente.
+
+5. Pricing exato SOMENTE quando a heurística não adiciona colunas: enumeração
+   incluir/excluir dos grupos de dual positivo, ordenados por densidade.
+   A mochila fracionária que ignora conflitos limita o valor de cada ramo.
+   Há podas por capacidade, conflito e valor. Ao terminar, o método conhece
+   o máximo dual com tolerância de poda 1e-10. Se interrompido, conserva a
+   cota superior da mochila fracionária inicial, nunca o melhor valor viável
+   como se fosse um máximo provado. Uma margem 1e-8 protege essa cota.
+   O pricing é exponencial no pior caso, como esperado para mochila com
+   conflitos. Não há enumeração antecipada de todos os recipientes.
+
+6. Limitantes: soma dos duais dividida por max(1, cota superior do pricing)
+   é uma cota de Farley, válida mesmo antes da convergência. Primeiro usa-se
+   a cota da mochila fracionária; uma enumeração completa a fortalece para
+   o máximo do pricing. O arredondamento usa ceil(cota-1e-6) e uma margem
+   adicional no denominador. Nunca se usa o objetivo do mestre restrito
+   sozinho como limite inferior. A cota de um filho herda a do pai.
+
+7. Ramificação: depois de certificar o pricing, uma solução integral é
+   expandida para itens originais, verificada e usada para atualizar a
+   incumbente. Para soluções fracionárias, calcula-se phi_ab, a soma de x_B
+   das colunas que contêm os dois grupos, e escolhe-se o par mais próximo
+   de 1/2. O filho "juntos" funde os grupos; o "separados" acrescenta conflito.
+   Ambos os filhos herdam todas as decisões do pai. A fila explora o menor
+   limitante, com desempate pela ordem de criação.
+
+8. Fronteira: um nó continua representado na fila enquanto é processado.
+   Ele só sai se resolvido/podado ou substituído pelos DOIS filhos. Na
+   interrupção, o mínimo das cotas dos nós abertos, limitado pela incumbente,
+   é a cota global; se a fila esvazia, LB=UB. Assim, um pricing interrompido
+   não faz desaparecer uma subárvore nem certifica um ótimo indevidamente.
+
+TEMPO E LIMITAÇÕES PRÁTICAS
+
+O orçamento é medido com steady_clock desde a entrada no solver; inclui
+heurística inicial, inicialização do Gurobi, PLs, pricing e árvore. O leitor
+precede o solver e a gravação da saída ocorre depois. Cada PL recebe apenas
+o tempo restante; um callback também solicita interrupção no deadline.
+Há verificações de prazo na heurística, enumeração, montagem de grupos e
+reutilização de colunas. Uma heurística interrompida não instala solução
+parcial. T=0 devolve imediatamente a solução unitária e a cota trivial.
+
+Gurobi TimeLimit e callbacks são cooperativos: inicialização de licença,
+rotinas nativas, alocação, ordenação e escalonamento do sistema operacional
+podem causar pequena ultrapassagem. Não se promete um prazo rígido de tempo
+real para essas operações. A busca não começa novas iterações após o prazo.
+Em erro do Gurobi, a incumbente e uma cota válida são preservadas, com aviso
+em stderr; isso não significa que a busca exata foi concluída.
+
+O grafo entre grupos ocupa memória quadrática; o banco global de colunas e
+a árvore podem crescer bastante. Não foram implementadas estabilização dual,
+heurística MIP opcional de arredondamento nem remoção de colunas antigas.
+Como em solvers de PL usuais, a certificação é numérica, com as tolerâncias
+acima, e não uma prova em aritmética racional exata.
+
+TESTES REPRODUZÍVEIS
+
+    make -C src test
+    python3 testes/verificar.py --report testes/resultados.json
+
+Requer apenas Python 3 (biblioteca padrão), além do executável e Gurobi.
+Os testes usam um oráculo independente de programação dinâmica sobre
+subconjuntos de itens: enumeram recipientes válidos e calculam a partição
+ótima. Nenhum código do branch-and-price é reutilizado no oráculo.
+
+A suíte padrão contém 7 arquivos fixos, 120 casos aleatórios com tamanhos e
+classes, e 60 casos de coloração de grafos (187 instâncias). Todos têm UB=LB
+igual ao ótimo independente. A instância ryan_foster.txt é a junção de dois
+ciclos de cinco vértices: PL=5 e OPT=6; exige explorar a ramificação, incluindo
+os dois filhos. O relatório registra 1 ramificação e 105 chamadas de pricing
+exato no total. Também testa T=0, 0,001, 0,03 e 0,1 s, classes repetidas,
+comentários, entrada/CLI inválidas e capacidade 2^63-1.
+
+Versões efetivamente usadas em 11/11/2026:
+- macOS, Apple Silicon (arm64)
+- Apple clang 17.0.0, C++17; flags -O2 -Wall -Wextra -Wpedantic
+- Gurobi Optimizer 13.0.2
+- Python 3.14.8
+
+Os resultados estão em testes/resultados.json. A mesma suíte foi executada
+com AddressSanitizer e UndefinedBehaviorSanitizer; relatório em
+testes/resultados-sanitizers.json.
+
+Para repetir a compilação instrumentada, a partir da raiz, usando o mesmo
+GUROBI_HOME do Makefile (substitua os caminhos para a sua instalação):
+
+    make -C src clean
+    make -C src CXXFLAGS='-O1 -g -std=c++17 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer'
+    make -C src test
+    make -C src clean
+    make -C src
+
+ENTREGA E TRANSPARÊNCIA DE IA
+
+    python3 testes/empacotar.py
+
+Gera entrega-bin-packing.zip com codigo/, testes/, ia/, docs/ e README, sem
+executáveis, objetos, bibliotecas, caches nem arquivos da instalação Gurobi.
+O script também confere os tipos de arquivos antes de compactar.
+No ZIP, src/ é mapeada para codigo/ e ai/ para ia/, conforme o enunciado.
+Nos comandos deste README, use codigo/ no lugar de src/ ao trabalhar no ZIP
+extraído; o script de testes detecta ambas as estruturas.
+Os originais e enunciado.pdf permanecem na área de trabalho e não precisam
+ser duplicados no arquivo final.
+
+ai/conversa.jsonl e ai/conversa.md registram os prompts, respostas e chamadas
+de ferramentas desta sessão em ordem cronológica, sem resumos. O exportador
+lê o registro local da sessão explicitamente indicada (veja ai/README).
+Ele não inclui instruções internas do aplicativo ou raciocínio interno.
+Para atualizar o registro depois de futuras conversas, execute o exportador
+para cada sessão utilizada e preserve a ordem e os registros anteriores.
+
+O pacote é preparado para revisão local. Nenhum e-mail foi enviado. A seção
+11 exige que o aluno compreenda e consiga explicar/modificar todos os fontes;
+use a descrição do algoritmo acima e os testes para estudar a implementação.
+Assunto exigido para a entrega: [PLI] Bin Packing com Classes de Conflito
+Destinatário indicado no enunciado: fkm@unicamp.br.
+
+GUIA DE ESTUDO E CONFERÊNCIA
+
+Leia docs/GUIA_DE_ESTUDO.md para a derivação do algoritmo, exemplos resolvidos,
+mapa de funções, roteiro de experimentos e perguntas com respostas.
+
+Para verificar uma saída sem confiar no verificador C++:
+
+    python3 testes/conferir_solucao.py -f testes/instancias/exemplo.txt -o saida.txt --exato
+
+O modo --exato calcula o ótimo por programação dinâmica independente; limitado
+a 16 itens. Sem essa opção, confere viabilidade e coerência do arquivo, sem
+validar o limitante inferior informado pelo branch-and-price.

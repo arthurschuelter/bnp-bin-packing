@@ -1,0 +1,23 @@
+Transparência de uso de IA
+
+Esta pasta contém a transcrição cronológica dos prompts do usuário, respostas
+do assistente e chamadas/resultados de ferramentas da sessão usada no trabalho.
+conversa.jsonl preserva os conteúdos; conversa.md oferece a versão legível.
+Não se trata de um resumo nem de uma lista apenas de prompts. Instruções
+internas do aplicativo, metadados de consumo e raciocínio interno não fazem
+parte da conversa exportada. estado.json indica se o turno já foi encerrado.
+
+O script testes/empacotar.py permite atualizar a exportação diretamente do
+JSONL local, sem conexões externas e sem modificar o registro original:
+
+    python3 testes/empacotar.py --sessao /caminho/da/sessao.jsonl
+
+Na preparação inicial foi usado também --aguardar-fim, que atualiza a conversa
+e o ZIP assim que a última resposta do assistente é registrada. A gravação
+usa substituição atômica do ZIP. Não inicie um novo turno antes de concluir
+essa atualização se quiser guardar exatamente a primeira conversa.
+
+Para futuras sessões, preserve antes os arquivos conversa.* com nomes
+cronológicos distintos e exporte a sessão seguinte. Inclua também qualquer
+outra conversa de IA usada pelo aluno fora deste ambiente. Este registro
+cobre apenas o trabalho efetivamente feito nesta sessão.

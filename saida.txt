@@ -1,0 +1,11 @@
+# valor da solucao (numero de recipientes)
+4
+# limitante inferior
+4
+# numero de recipientes
+4
+# itens de cada recipiente
+2 5
+1 4
+8 6 3
+7
