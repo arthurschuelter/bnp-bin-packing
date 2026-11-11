@@ -1,0 +1,8 @@
+# n (itens), C (capacidade), k (classes de conflito)
+8 10 3
+# tamanhos s_1 ... s_n
+5 5 4 4 3 3 3 3
+# classes: m_t seguido dos itens da classe
+2 1 2
+2 3 4
+3 5 6 7

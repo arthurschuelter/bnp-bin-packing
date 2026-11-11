@@ -1,0 +1,5685 @@
+{
+  "cases": 567,
+  "branches": 1,
+  "exact_calls": 255,
+  "randomized_seed": 20261111,
+  "results": [
+    {
+      "instance": "clique",
+      "n": 6,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0078
+    },
+    {
+      "instance": "exemplo",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0153
+    },
+    {
+      "instance": "ryan_foster",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 1,
+      "exact_calls": 3,
+      "seconds": 0.0074
+    },
+    {
+      "instance": "sem_classes_pequenos",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0038
+    },
+    {
+      "instance": "sem_conflitos",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0032
+    },
+    {
+      "instance": "sobrepostas",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0032
+    },
+    {
+      "instance": "unitario",
+      "n": 1,
+      "optimum": 1,
+      "lower_bound": 1,
+      "value": 1,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-000",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0032
+    },
+    {
+      "instance": "random-001",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0033
+    },
+    {
+      "instance": "random-002",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0033
+    },
+    {
+      "instance": "random-003",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0066
+    },
+    {
+      "instance": "random-004",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0034
+    },
+    {
+      "instance": "random-005",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-006",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-007",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "random-008",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0032
+    },
+    {
+      "instance": "random-009",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-010",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-011",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-012",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-013",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-014",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-015",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-016",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-017",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-018",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.007
+    },
+    {
+      "instance": "random-019",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-020",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-021",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-022",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-023",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-024",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-025",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-026",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-027",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-028",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-029",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-030",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-031",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-032",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-033",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-034",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-035",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-036",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-037",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-038",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-039",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-040",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-041",
+      "n": 7,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-042",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-043",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-044",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-045",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-046",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-047",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-048",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-049",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-050",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-051",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0068
+    },
+    {
+      "instance": "random-052",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-053",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-054",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-055",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-056",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-057",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-058",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-059",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-060",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-061",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-062",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-063",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-064",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-065",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-066",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-067",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-068",
+      "n": 8,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-069",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-070",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-071",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-072",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-073",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-074",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-075",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-076",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-077",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-078",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-079",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-080",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-081",
+      "n": 12,
+      "optimum": 11,
+      "lower_bound": 11,
+      "value": 11,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-082",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-083",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0076
+    },
+    {
+      "instance": "random-084",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0033
+    },
+    {
+      "instance": "random-085",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-086",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-087",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-088",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-089",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-090",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-091",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-092",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-093",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-094",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-095",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-096",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-097",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-098",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-099",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-100",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-101",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-102",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-103",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0048
+    },
+    {
+      "instance": "random-104",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-105",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-106",
+      "n": 5,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-107",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-108",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-109",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-110",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-111",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-112",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-113",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-114",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0065
+    },
+    {
+      "instance": "random-115",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0076
+    },
+    {
+      "instance": "random-116",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-117",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-118",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-119",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-120",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-121",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-122",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-123",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-124",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-125",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-126",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-127",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-128",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-129",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-130",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-131",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-132",
+      "n": 8,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-133",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-134",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-135",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-136",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0046
+    },
+    {
+      "instance": "random-137",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-138",
+      "n": 10,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-139",
+      "n": 10,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-140",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-141",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-142",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-143",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-144",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-145",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-146",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-147",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-148",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-149",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-150",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0046
+    },
+    {
+      "instance": "random-151",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-152",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-153",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-154",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-155",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-156",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-157",
+      "n": 11,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-158",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-159",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-160",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-161",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-162",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-163",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-164",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-165",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-166",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-167",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-168",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-169",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-170",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-171",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-172",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-173",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-174",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-175",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-176",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-177",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-178",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-179",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-180",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-181",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-182",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-183",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-184",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-185",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-186",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-187",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-188",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-189",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-190",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-191",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-192",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-193",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0047
+    },
+    {
+      "instance": "random-194",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-195",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-196",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-197",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-198",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-199",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-200",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-201",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-202",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-203",
+      "n": 5,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-204",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-205",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-206",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-207",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-208",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-209",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-210",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-211",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-212",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-213",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-214",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-215",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-216",
+      "n": 6,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-217",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-218",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-219",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-220",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-221",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-222",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-223",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-224",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-225",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-226",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-227",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-228",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-229",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-230",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-231",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-232",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-233",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-234",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-235",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-236",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-237",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-238",
+      "n": 5,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-239",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-240",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-241",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-242",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-243",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-244",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-245",
+      "n": 10,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-246",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-247",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-248",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-249",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-250",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-251",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-252",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-253",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-254",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-255",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-256",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-257",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-258",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-259",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-260",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-261",
+      "n": 8,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-262",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-263",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-264",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-265",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-266",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-267",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-268",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-269",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-270",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-271",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-272",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-273",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-274",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-275",
+      "n": 4,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-276",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-277",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-278",
+      "n": 11,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "random-279",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-280",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-281",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-282",
+      "n": 4,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-283",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-284",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-285",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-286",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-287",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-288",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-289",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-290",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-291",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-292",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-293",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-294",
+      "n": 10,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-295",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-296",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-297",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-298",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-299",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-300",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-301",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-302",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-303",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-304",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-305",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-306",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-307",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-308",
+      "n": 4,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-309",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-310",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-311",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-312",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-313",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-314",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0066
+    },
+    {
+      "instance": "random-315",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-316",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-317",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-318",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-319",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-320",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-321",
+      "n": 10,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-322",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-323",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-324",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-325",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-326",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-327",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-328",
+      "n": 11,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-329",
+      "n": 10,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-330",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-331",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-332",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-333",
+      "n": 7,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-334",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-335",
+      "n": 11,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-336",
+      "n": 10,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-337",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-338",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-339",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-340",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-341",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-342",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-343",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-344",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-345",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-346",
+      "n": 6,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-347",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-348",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-349",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-350",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-351",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-352",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-353",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-354",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-355",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-356",
+      "n": 9,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-357",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-358",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-359",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-360",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-361",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-362",
+      "n": 8,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-363",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-364",
+      "n": 10,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-365",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-366",
+      "n": 4,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-367",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-368",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-369",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-370",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-371",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-372",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-373",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-374",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-375",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-376",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-377",
+      "n": 8,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-378",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-379",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-380",
+      "n": 9,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-381",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-382",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-383",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-384",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-385",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-386",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-387",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-388",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-389",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-390",
+      "n": 8,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-391",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-392",
+      "n": 11,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-393",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-394",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-395",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-396",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0031
+    },
+    {
+      "instance": "random-397",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-398",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-399",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-400",
+      "n": 7,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-401",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0052
+    },
+    {
+      "instance": "random-402",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-403",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-404",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-405",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-406",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-407",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-408",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-409",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-410",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-411",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-412",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-413",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "random-414",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-415",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-416",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-417",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-418",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-419",
+      "n": 11,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-420",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-421",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-422",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-423",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-424",
+      "n": 4,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-425",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-426",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "random-427",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-428",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "random-429",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "random-430",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-431",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-432",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-433",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-434",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-435",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-436",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-437",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-438",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-439",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-440",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-441",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "random-442",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-443",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-444",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "random-445",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-446",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-447",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "random-448",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-449",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.005
+    },
+    {
+      "instance": "random-450",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-451",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-452",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-453",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-454",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-455",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-456",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-457",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-458",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-459",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-460",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-461",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0054
+    },
+    {
+      "instance": "random-462",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "random-463",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-464",
+      "n": 4,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-465",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-466",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-467",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "random-468",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-469",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-470",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-471",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-472",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-473",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-474",
+      "n": 11,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0065
+    },
+    {
+      "instance": "random-475",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-476",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-477",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-478",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-479",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-480",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "random-481",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-482",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-483",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-484",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-485",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0064
+    },
+    {
+      "instance": "random-486",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-487",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0027
+    },
+    {
+      "instance": "random-488",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0064
+    },
+    {
+      "instance": "random-489",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "random-490",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-491",
+      "n": 10,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-492",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-493",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0049
+    },
+    {
+      "instance": "random-494",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-495",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "random-496",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "random-497",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "random-498",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0028
+    },
+    {
+      "instance": "random-499",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0051
+    },
+    {
+      "instance": "graph-000",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-001",
+      "n": 8,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "graph-002",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "graph-003",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "graph-004",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "graph-005",
+      "n": 12,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-006",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-007",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "graph-008",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "graph-009",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-010",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0053
+    },
+    {
+      "instance": "graph-011",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "graph-012",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "graph-013",
+      "n": 9,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "graph-014",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0069
+    },
+    {
+      "instance": "graph-015",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "graph-016",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "graph-017",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-018",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0057
+    },
+    {
+      "instance": "graph-019",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0067
+    },
+    {
+      "instance": "graph-020",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "graph-021",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "graph-022",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "graph-023",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "graph-024",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "graph-025",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-026",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-027",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "graph-028",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-029",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-030",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-031",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-032",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-033",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "graph-034",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0056
+    },
+    {
+      "instance": "graph-035",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-036",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0064
+    },
+    {
+      "instance": "graph-037",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0068
+    },
+    {
+      "instance": "graph-038",
+      "n": 12,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "graph-039",
+      "n": 9,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0029
+    },
+    {
+      "instance": "graph-040",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-041",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "graph-042",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.007
+    },
+    {
+      "instance": "graph-043",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0066
+    },
+    {
+      "instance": "graph-044",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-045",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-046",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    },
+    {
+      "instance": "graph-047",
+      "n": 8,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.003
+    },
+    {
+      "instance": "graph-048",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-049",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0055
+    },
+    {
+      "instance": "graph-050",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0058
+    },
+    {
+      "instance": "graph-051",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "graph-052",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0059
+    },
+    {
+      "instance": "graph-053",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0065
+    },
+    {
+      "instance": "graph-054",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0061
+    },
+    {
+      "instance": "graph-055",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.006
+    },
+    {
+      "instance": "graph-056",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0067
+    },
+    {
+      "instance": "graph-057",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0063
+    },
+    {
+      "instance": "graph-058",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0073
+    },
+    {
+      "instance": "graph-059",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0062
+    }
+  ],
+  "additional_checks": [
+    "timeouts",
+    "overflow",
+    "duplicates",
+    "invalid input",
+    "CLI"
+  ]
+}

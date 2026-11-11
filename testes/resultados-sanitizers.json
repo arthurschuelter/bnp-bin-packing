@@ -1,0 +1,1885 @@
+{
+  "cases": 187,
+  "branches": 1,
+  "exact_calls": 105,
+  "randomized_seed": 20261111,
+  "results": [
+    {
+      "instance": "clique",
+      "n": 6,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.7123
+    },
+    {
+      "instance": "exemplo",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0469
+    },
+    {
+      "instance": "ryan_foster",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 1,
+      "exact_calls": 3,
+      "seconds": 0.036
+    },
+    {
+      "instance": "sem_classes_pequenos",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0251
+    },
+    {
+      "instance": "sem_conflitos",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "sobrepostas",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0251
+    },
+    {
+      "instance": "unitario",
+      "n": 1,
+      "optimum": 1,
+      "lower_bound": 1,
+      "value": 1,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0251
+    },
+    {
+      "instance": "random-000",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0249
+    },
+    {
+      "instance": "random-001",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0253
+    },
+    {
+      "instance": "random-002",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0248
+    },
+    {
+      "instance": "random-003",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0326
+    },
+    {
+      "instance": "random-004",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-005",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0328
+    },
+    {
+      "instance": "random-006",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0263
+    },
+    {
+      "instance": "random-007",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0338
+    },
+    {
+      "instance": "random-008",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0253
+    },
+    {
+      "instance": "random-009",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0259
+    },
+    {
+      "instance": "random-010",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.034
+    },
+    {
+      "instance": "random-011",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0295
+    },
+    {
+      "instance": "random-012",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0429
+    },
+    {
+      "instance": "random-013",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "random-014",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0348
+    },
+    {
+      "instance": "random-015",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0336
+    },
+    {
+      "instance": "random-016",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0252
+    },
+    {
+      "instance": "random-017",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0259
+    },
+    {
+      "instance": "random-018",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0339
+    },
+    {
+      "instance": "random-019",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0258
+    },
+    {
+      "instance": "random-020",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.038
+    },
+    {
+      "instance": "random-021",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0274
+    },
+    {
+      "instance": "random-022",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0274
+    },
+    {
+      "instance": "random-023",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0276
+    },
+    {
+      "instance": "random-024",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0335
+    },
+    {
+      "instance": "random-025",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0274
+    },
+    {
+      "instance": "random-026",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.033
+    },
+    {
+      "instance": "random-027",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0423
+    },
+    {
+      "instance": "random-028",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0262
+    },
+    {
+      "instance": "random-029",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0359
+    },
+    {
+      "instance": "random-030",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0356
+    },
+    {
+      "instance": "random-031",
+      "n": 9,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0349
+    },
+    {
+      "instance": "random-032",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0323
+    },
+    {
+      "instance": "random-033",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-034",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-035",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0339
+    },
+    {
+      "instance": "random-036",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "random-037",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.026
+    },
+    {
+      "instance": "random-038",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-039",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0249
+    },
+    {
+      "instance": "random-040",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0253
+    },
+    {
+      "instance": "random-041",
+      "n": 7,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0251
+    },
+    {
+      "instance": "random-042",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0331
+    },
+    {
+      "instance": "random-043",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0262
+    },
+    {
+      "instance": "random-044",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0254
+    },
+    {
+      "instance": "random-045",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0324
+    },
+    {
+      "instance": "random-046",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-047",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0256
+    },
+    {
+      "instance": "random-048",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0252
+    },
+    {
+      "instance": "random-049",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0254
+    },
+    {
+      "instance": "random-050",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-051",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0356
+    },
+    {
+      "instance": "random-052",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-053",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0258
+    },
+    {
+      "instance": "random-054",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-055",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0342
+    },
+    {
+      "instance": "random-056",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0263
+    },
+    {
+      "instance": "random-057",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0328
+    },
+    {
+      "instance": "random-058",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0254
+    },
+    {
+      "instance": "random-059",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0354
+    },
+    {
+      "instance": "random-060",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0264
+    },
+    {
+      "instance": "random-061",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.035
+    },
+    {
+      "instance": "random-062",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0262
+    },
+    {
+      "instance": "random-063",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0254
+    },
+    {
+      "instance": "random-064",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0334
+    },
+    {
+      "instance": "random-065",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-066",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0256
+    },
+    {
+      "instance": "random-067",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0405
+    },
+    {
+      "instance": "random-068",
+      "n": 8,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.034
+    },
+    {
+      "instance": "random-069",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0258
+    },
+    {
+      "instance": "random-070",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-071",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-072",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0253
+    },
+    {
+      "instance": "random-073",
+      "n": 7,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0329
+    },
+    {
+      "instance": "random-074",
+      "n": 4,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "random-075",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0343
+    },
+    {
+      "instance": "random-076",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0337
+    },
+    {
+      "instance": "random-077",
+      "n": 12,
+      "optimum": 10,
+      "lower_bound": 10,
+      "value": 10,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0365
+    },
+    {
+      "instance": "random-078",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0333
+    },
+    {
+      "instance": "random-079",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-080",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-081",
+      "n": 12,
+      "optimum": 11,
+      "lower_bound": 11,
+      "value": 11,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0363
+    },
+    {
+      "instance": "random-082",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.026
+    },
+    {
+      "instance": "random-083",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0357
+    },
+    {
+      "instance": "random-084",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0265
+    },
+    {
+      "instance": "random-085",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.026
+    },
+    {
+      "instance": "random-086",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0259
+    },
+    {
+      "instance": "random-087",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-088",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0258
+    },
+    {
+      "instance": "random-089",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.034
+    },
+    {
+      "instance": "random-090",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0343
+    },
+    {
+      "instance": "random-091",
+      "n": 6,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "random-092",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0324
+    },
+    {
+      "instance": "random-093",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0345
+    },
+    {
+      "instance": "random-094",
+      "n": 12,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0359
+    },
+    {
+      "instance": "random-095",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0315
+    },
+    {
+      "instance": "random-096",
+      "n": 11,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0262
+    },
+    {
+      "instance": "random-097",
+      "n": 9,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0376
+    },
+    {
+      "instance": "random-098",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.026
+    },
+    {
+      "instance": "random-099",
+      "n": 6,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.032
+    },
+    {
+      "instance": "random-100",
+      "n": 7,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0329
+    },
+    {
+      "instance": "random-101",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0255
+    },
+    {
+      "instance": "random-102",
+      "n": 7,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0256
+    },
+    {
+      "instance": "random-103",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0321
+    },
+    {
+      "instance": "random-104",
+      "n": 11,
+      "optimum": 8,
+      "lower_bound": 8,
+      "value": 8,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0349
+    },
+    {
+      "instance": "random-105",
+      "n": 5,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.033
+    },
+    {
+      "instance": "random-106",
+      "n": 5,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0259
+    },
+    {
+      "instance": "random-107",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0262
+    },
+    {
+      "instance": "random-108",
+      "n": 6,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "random-109",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0269
+    },
+    {
+      "instance": "random-110",
+      "n": 8,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0259
+    },
+    {
+      "instance": "random-111",
+      "n": 5,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0264
+    },
+    {
+      "instance": "random-112",
+      "n": 11,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0257
+    },
+    {
+      "instance": "random-113",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.026
+    },
+    {
+      "instance": "random-114",
+      "n": 12,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0358
+    },
+    {
+      "instance": "random-115",
+      "n": 12,
+      "optimum": 9,
+      "lower_bound": 9,
+      "value": 9,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0362
+    },
+    {
+      "instance": "random-116",
+      "n": 4,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "random-117",
+      "n": 10,
+      "optimum": 7,
+      "lower_bound": 7,
+      "value": 7,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0357
+    },
+    {
+      "instance": "random-118",
+      "n": 5,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0326
+    },
+    {
+      "instance": "random-119",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0346
+    },
+    {
+      "instance": "graph-000",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0353
+    },
+    {
+      "instance": "graph-001",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0374
+    },
+    {
+      "instance": "graph-002",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0342
+    },
+    {
+      "instance": "graph-003",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0349
+    },
+    {
+      "instance": "graph-004",
+      "n": 10,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0362
+    },
+    {
+      "instance": "graph-005",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.037
+    },
+    {
+      "instance": "graph-006",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0353
+    },
+    {
+      "instance": "graph-007",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0345
+    },
+    {
+      "instance": "graph-008",
+      "n": 12,
+      "optimum": 6,
+      "lower_bound": 6,
+      "value": 6,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0378
+    },
+    {
+      "instance": "graph-009",
+      "n": 8,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0265
+    },
+    {
+      "instance": "graph-010",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0359
+    },
+    {
+      "instance": "graph-011",
+      "n": 10,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0264
+    },
+    {
+      "instance": "graph-012",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0349
+    },
+    {
+      "instance": "graph-013",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0352
+    },
+    {
+      "instance": "graph-014",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0336
+    },
+    {
+      "instance": "graph-015",
+      "n": 8,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0258
+    },
+    {
+      "instance": "graph-016",
+      "n": 11,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0362
+    },
+    {
+      "instance": "graph-017",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0348
+    },
+    {
+      "instance": "graph-018",
+      "n": 9,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0351
+    },
+    {
+      "instance": "graph-019",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0371
+    },
+    {
+      "instance": "graph-020",
+      "n": 8,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0268
+    },
+    {
+      "instance": "graph-021",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.035
+    },
+    {
+      "instance": "graph-022",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0353
+    },
+    {
+      "instance": "graph-023",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.036
+    },
+    {
+      "instance": "graph-024",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0354
+    },
+    {
+      "instance": "graph-025",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0355
+    },
+    {
+      "instance": "graph-026",
+      "n": 8,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.035
+    },
+    {
+      "instance": "graph-027",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0358
+    },
+    {
+      "instance": "graph-028",
+      "n": 9,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0261
+    },
+    {
+      "instance": "graph-029",
+      "n": 12,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.036
+    },
+    {
+      "instance": "graph-030",
+      "n": 12,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0352
+    },
+    {
+      "instance": "graph-031",
+      "n": 9,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0271
+    },
+    {
+      "instance": "graph-032",
+      "n": 8,
+      "optimum": 2,
+      "lower_bound": 2,
+      "value": 2,
+      "branches": 0,
+      "exact_calls": 0,
+      "seconds": 0.0259
+    },
+    {
+      "instance": "graph-033",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0341
+    },
+    {
+      "instance": "graph-034",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0348
+    },
+    {
+      "instance": "graph-035",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0355
+    },
+    {
+      "instance": "graph-036",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0364
+    },
+    {
+      "instance": "graph-037",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0352
+    },
+    {
+      "instance": "graph-038",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0353
+    },
+    {
+      "instance": "graph-039",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0354
+    },
+    {
+      "instance": "graph-040",
+      "n": 12,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0372
+    },
+    {
+      "instance": "graph-041",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0349
+    },
+    {
+      "instance": "graph-042",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0382
+    },
+    {
+      "instance": "graph-043",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0364
+    },
+    {
+      "instance": "graph-044",
+      "n": 12,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0355
+    },
+    {
+      "instance": "graph-045",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0371
+    },
+    {
+      "instance": "graph-046",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0356
+    },
+    {
+      "instance": "graph-047",
+      "n": 9,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0343
+    },
+    {
+      "instance": "graph-048",
+      "n": 8,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.035
+    },
+    {
+      "instance": "graph-049",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0362
+    },
+    {
+      "instance": "graph-050",
+      "n": 9,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0341
+    },
+    {
+      "instance": "graph-051",
+      "n": 12,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0364
+    },
+    {
+      "instance": "graph-052",
+      "n": 10,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0358
+    },
+    {
+      "instance": "graph-053",
+      "n": 10,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0348
+    },
+    {
+      "instance": "graph-054",
+      "n": 8,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0339
+    },
+    {
+      "instance": "graph-055",
+      "n": 10,
+      "optimum": 5,
+      "lower_bound": 5,
+      "value": 5,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0367
+    },
+    {
+      "instance": "graph-056",
+      "n": 12,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0361
+    },
+    {
+      "instance": "graph-057",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0359
+    },
+    {
+      "instance": "graph-058",
+      "n": 11,
+      "optimum": 4,
+      "lower_bound": 4,
+      "value": 4,
+      "branches": 0,
+      "exact_calls": 2,
+      "seconds": 0.0376
+    },
+    {
+      "instance": "graph-059",
+      "n": 11,
+      "optimum": 3,
+      "lower_bound": 3,
+      "value": 3,
+      "branches": 0,
+      "exact_calls": 1,
+      "seconds": 0.0361
+    }
+  ],
+  "additional_checks": [
+    "timeouts",
+    "overflow",
+    "duplicates",
+    "invalid input",
+    "CLI"
+  ]
+}
