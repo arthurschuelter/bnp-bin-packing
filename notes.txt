@@ -1,1 +1,0 @@
-Leia AGENTS.md e docs/CONTEXTO_CODEX.md. Continue deste estado, sem reimplementar do zero, e confira as dependências deste computador.

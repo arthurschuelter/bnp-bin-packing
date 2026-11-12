@@ -46,10 +46,10 @@ A entrada contém `n` itens, capacidade `C`, tamanhos positivos `s_i <= C` e cla
 
 Um recipiente válido `B` é um conjunto não vazio de itens tal que:
 
-\[
+$$
 \sum_{i\in B}s_i\le C,
 \qquad |B\cap S_t|\le1\quad\text{para cada classe }t.
-\]
+$$
 
 Uma solução é uma **partição** dos itens em recipientes válidos: cada item aparece exatamente uma vez. Minimiza-se a quantidade de recipientes.
 
@@ -65,10 +65,10 @@ Definições usadas no código:
 
 As cotas iniciais são:
 
-\[
+$$
 LB_0=\max\left\{\left\lceil\frac{\sum_i s_i}{C}\right\rceil,
 \max_t |S_t|\right\}.
-\]
+$$
 
 Sem classes, o segundo termo é zero. As cotas são válidas porque cada recipiente tem capacidade `C` e cada classe precisa distribuir seus itens em recipientes distintos.
 
@@ -76,13 +76,13 @@ Sem classes, o segundo termo é zero. As cotas são válidas porque cada recipie
 
 Seja `Bcal` a família de todos os recipientes válidos não vazios. A formulação do enunciado é:
 
-\[
+$$
 \min\sum_{B\in\mathcal B}x_B
-\]
-\[
+$$
+$$
 \sum_{B\ni i}x_B=1\quad\forall i,
 \qquad x_B\in\{0,1\}.
-\]
+$$
 
 `x_B=1` significa usar o recipiente `B`. As igualdades exigem cobrir cada item exatamente uma vez. O custo de qualquer coluna é 1, pois cada recipiente conta uma unidade.
 
@@ -113,27 +113,27 @@ O **problema mestre restrito (PMR)** contém só as colunas já conhecidas. Ele 
 
 Por ser um problema de minimização com menos opções:
 
-\[
+$$
 z_{PMR}\ge z_{LP}.
-\]
+$$
 
 Aqui `z_LP` é o ótimo da relaxação com todas as colunas. Atenção: não existe uma relação que permita concluir `z_PMR <= OPT` em geral. Se o mestre contém apenas unitários, pode custar `n`, mesmo que exista um empacotamento com muito menos recipientes. Usar o objetivo do PMR diretamente como LB antes de certificar o pricing pode podar soluções ótimas.
 
 Para as igualdades de cobertura, o dual completo é:
 
-\[
+$$
 \max\sum_i u_i,
 \qquad \sum_{i\in B}u_i\le1\quad\forall B\in\mathcal B,
 \qquad u_i\in\mathbb R.
-\]
+$$
 
 Os duais são livres, pois as restrições primais são igualdades. O Gurobi retorna esses valores no atributo `Pi`.
 
 O custo reduzido de uma coluna é:
 
-\[
+$$
 \bar c_B=1-\sum_{i\in B}u_i.
-\]
+$$
 
 Exemplo aritmético: uma coluna válida com duais `0,7` e `0,6` soma `1,3` e tem custo reduzido `-0,3`. Ela viola uma restrição dual ausente e deve ser oferecida ao mestre. Sua inclusão pode melhorar o objetivo; degenerescência pode impedir uma melhora imediata estrita.
 
@@ -141,9 +141,9 @@ Exemplo aritmético: uma coluna válida com duais `0,7` e `0,6` soma `1,3` e tem
 
 O pricing resolve:
 
-\[
+$$
 \alpha^*=\max_{B\text{ válido}}\sum_{i\in B}u_i.
-\]
+$$
 
 Isso é uma mochila com conflitos: tamanhos são os pesos, capacidade é `C` e duais são os valores. Há coluna melhorante quando `alpha* > 1`.
 
@@ -173,15 +173,15 @@ Confundir `best` com uma cota superior quando há interrupção é um erro que p
 
 Suponha que conhecemos `alpha >= 1` com:
 
-\[
+$$
 \sum_{i\in B}u_i\le\alpha\quad\text{para todo padrão válido }B.
-\]
+$$
 
 Então o vetor `u/alpha` satisfaz todas as restrições do dual completo. Por dualidade fraca:
 
-\[
+$$
 z_{LP}\ge\frac{\sum_i u_i}{\alpha}.
-\]
+$$
 
 Se os duais são ótimos para o PMR, a soma é seu objetivo, dando a forma usual `z_PMR/alpha`.
 
@@ -189,9 +189,9 @@ Exemplo: `z_PMR=6` e uma cota superior de pricing `alpha=1,2` dão `z_LP >= 5`. 
 
 Na implementação, `certifiedBound` usa a soma dos duais e uma cota superior do pricing. Como o objetivo inteiro é uma contagem, arredonda-se para cima com tolerância:
 
-\[
+$$
 LB_{nó}=\max\left\{LB_{pai},\left\lceil\frac{\sum_G u_G}{\alpha}-10^{-6}\right\rceil\right\}.
-\]
+$$
 
 O denominador também recebe uma margem conservadora. Farley pode justificar a poda antes de uma enumeração exata completa, desde que `alpha` seja uma cota superior válida. A cota fracionária sem conflitos já fornece isso; o pricing exato pode fortalecê-la.
 
@@ -201,9 +201,9 @@ A solução da relaxação pode usar frações de recipientes. Para chegar a uma
 
 Para dois grupos distintos `a,b`, calcula-se:
 
-\[
+$$
 \phi_{ab}=\sum_{B\supseteq\{a,b\}}x_B.
-\]
+$$
 
 Se `0 < phi_ab < 1`, os grupos estão parcialmente juntos na solução fracionária. O código escolhe um par com valor próximo de `1/2` e cria dois filhos:
 
@@ -238,9 +238,9 @@ Enquanto um nó é processado, ele permanece representado na fila. Só é removi
 
 Se existem nós abertos:
 
-\[
+$$
 LB_{global}=\min\{UB,\min_{N\text{ aberto}}LB_N\}.
-\]
+$$
 
 O código preserva também a cota inicial. Se a fila esvaziou, `LB_global=UB`.
 
@@ -290,10 +290,10 @@ Para visualizar a decisão, considere o par compatível `{1,3}`. Juntá-lo cria 
 
 Se `M` é o conjunto de itens restantes e `i` é seu menor item:
 
-\[
+$$
 DP(\varnothing)=0,
 \qquad DP(M)=1+\min_{\substack{B\subseteq M,\ i\in B\\B\text{ válido}}}DP(M\setminus B).
-\]
+$$
 
 Toda partição contém exatamente um recipiente com `i`. Examinar todas essas escolhas e resolver o restante considera todas as partições possíveis. Fixar `i` evita repetir escolhas apenas por permutar a ordem dos recipientes. A prova de correção é uma indução no número de itens de `M`.
 
