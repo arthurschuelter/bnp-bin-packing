@@ -7,7 +7,6 @@
 #include "binpacksolver.h"
 #include "branchprice.h"
 #include <algorithm>
-#include <chrono>
 #include <iostream>
 #include <numeric>
 #include <random>

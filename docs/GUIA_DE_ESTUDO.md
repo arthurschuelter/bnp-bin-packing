@@ -153,7 +153,7 @@ Grupos de dual não positivo podem ser ignorados: retirar um grupo de um padrão
 
 ### Pricing heurístico
 
-O código tenta 12 ordens de grupos: densidade `u_G/s(G)`, valor `u_G` e embaralhamentos. Para cada ordem, faz uma seleção gulosa respeitando capacidade e conflitos. Adiciona colunas novas com valor maior que `1+1e-7`.
+`addHeuristicColumns` tenta até 12 ordens de grupos: densidade `u_G/s(G)`, valor `u_G` e embaralhamentos. Para cada ordem, faz uma seleção gulosa respeitando capacidade e conflitos. Adiciona colunas novas com valor maior que `1+1e-7` e retorna quantas foram inseridas no mestre.
 
 Se a heurística não encontrar uma coluna, isso significa apenas que suas tentativas falharam. Não prova que não existe uma.
 

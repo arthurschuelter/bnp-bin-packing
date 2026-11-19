@@ -1,3 +1,5 @@
 .DS_Store
 .vscode/
 .agents/
+/src/compile_flags.txt
+src/binpack

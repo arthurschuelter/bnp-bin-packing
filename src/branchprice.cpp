@@ -1,7 +1,9 @@
 // Set partitioning branch-and-price. Only continuous variables reach Gurobi.
 #include "branchprice.h"
 #include "gurobi_c++.h"
+#include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <functional>
 #include <iostream>
 #include <map>
@@ -222,6 +224,48 @@ struct Pricing
 	}
 };
 
+template <typename AddColumn>
+std::size_t addHeuristicColumns(const Pricing &pricing, std::mt19937_64 &rng, const AddColumn &add)
+{
+	const auto &groups = pricing.g;
+	const auto &dual = pricing.u;
+	std::size_t added = 0;
+	// Try density order first, then dual value, then shuffled orders.
+	for (int round = 0; round < 12 && Clock::now() < pricing.deadline; ++round)
+	{
+		Pattern order = pricing.order;
+		if (round == 1)
+			std::sort(order.begin(), order.end(),
+			          [&](int a, int b) { return dual[a] != dual[b] ? dual[a] > dual[b] : a < b; });
+		else if (round > 1)
+			std::shuffle(order.begin(), order.end(), rng);
+		Pattern p;
+		long long remaining = pricing.capacity;
+		long double value = 0;
+		for (int g : order)
+		{
+			if (groups.size[g] > remaining)
+				continue;
+			bool ok = true;
+			for (int h : p)
+				if (groups.conflict[g][h])
+				{
+					ok = false;
+					break;
+				}
+			if (ok)
+			{
+				p.push_back(g);
+				remaining -= groups.size[g];
+				value += dual[g];
+			}
+		}
+		if (value > 1 + RC_EPS && add(p))
+			++added;
+	}
+	return added;
+}
+
 int certifiedBound(const std::vector<double> &u, long double alpha, int inherited)
 {
 	long double sum = 0;
@@ -239,23 +283,28 @@ struct Stats
 
 void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 {
+	std::cout << "Starting BranchAndPrice\n";
 	std::priority_queue<Node, std::vector<Node>, BestBound> open;
 	unsigned long long next_id = 1;
 	open.push(Node{{}, {}, data.lower_bound, 0});
 	std::set<Pattern> pool;
 	for (int i = 1; i <= data.n; ++i)
 		pool.insert({i});
+
 	for (auto bin : data.best_solution)
 	{
 		std::sort(bin.begin(), bin.end());
 		pool.insert(bin);
 	}
+
 	Stats stats;
 	std::mt19937_64 rng(data.seed);
+
 	try
 	{
 		GRBEnv env(true);
-		env.set(GRB_IntParam_OutputFlag, 1);
+		env.set(GRB_IntParam_OutputFlag, 0);
+		// env.set(GRB_IntParam_OutputFlag, 1);
 		env.set(GRB_IntParam_Threads, 1);
 		env.start();
 		DeadlineCallback callback(deadline);
@@ -325,6 +374,7 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 				    std::max(0.0, std::chrono::duration<double>(deadline - Clock::now()).count()));
 				model.optimize();
 				++stats.lp;
+				// Por que != de GRB_OPTIMAL
 				if (model.get(GRB_IntAttr_Status) != GRB_OPTIMAL)
 				{
 					stopped = true;
@@ -340,44 +390,9 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 					solved = true;
 					break;
 				}
-				bool added = false;
-				// Always run the heuristic first; vary value/density/randomized order.
-				for (int round = 0; round < 12 && Clock::now() < deadline; ++round)
-				{
-					Pattern order = pricing.order;
-					if (round == 1)
-						std::sort(order.begin(), order.end(), [&](int a, int b)
-						          { return dual[a] != dual[b] ? dual[a] > dual[b] : a < b; });
-					else if (round > 1)
-						std::shuffle(order.begin(), order.end(), rng);
-					Pattern p;
-					long long remaining = data.C;
-					long double value = 0;
-					for (int g : order)
-					{
-						if (groups.size[g] > remaining)
-							continue;
-						bool ok = true;
-						for (int h : p)
-							if (groups.conflict[g][h])
-							{
-								ok = false;
-								break;
-							}
-						if (ok)
-						{
-							p.push_back(g);
-							remaining -= groups.size[g];
-							value += dual[g];
-						}
-					}
-					if (value > 1 + RC_EPS && add(p))
-					{
-						added = true;
-						++stats.heuristic;
-					}
-				}
-				if (added)
+				const auto added = addHeuristicColumns(pricing, rng, add);
+				stats.heuristic += added;
+				if (added > 0)
 					continue;
 				if (Clock::now() >= deadline)
 				{
