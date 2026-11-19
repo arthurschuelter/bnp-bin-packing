@@ -382,6 +382,7 @@ O Makefile da raiz encaminha as variáveis para `src/`. No ZIP extraído, acresc
 | Arquivo | Símbolos principais | Pergunta para orientar a leitura |
 |---|---|---|
 | `src/main.cpp` | `ReadInstance`, `main`, `WriteSolution` | Como a entrada vira dados e como a saída é validada? |
+| `src/commandline.h`, `src/commandline.cpp` | `CommandLineOptions`, `ParseCommandLine` | Como as opções da linha de comando são lidas e validadas antes da execução? |
 | `src/binpacking.h` | `Prepare`, `Conflict`, `TrivialLowerBound`, `CheckSolution` | Que propriedades são válidas antes da busca? |
 | `src/binpacksolver.cpp` | `ItemPriority`, `FirstFitRound`, `RandomizedFFD`, `SolveBinPacking` | Como obter uma incumbente e iniciar o relógio? |
 | `src/branchprice.cpp` | `Node`, `Groups`, `Pricing`, `certifiedBound`, `BranchAndPrice` | Como o problema completo é resolvido sem listar todas as colunas? |

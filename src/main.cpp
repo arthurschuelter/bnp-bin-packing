@@ -10,30 +10,18 @@
 //----------------------------------------------------------------------
 #include "binpacking.h"
 #include "binpacksolver.h"
+#include "commandline.h"
 #include <cerrno>
-#include <chrono>
 #include <climits>
-#include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include <limits>
 #include <set>
 #include <sstream>
 #include <string>
 #include <vector>
 
 using namespace std;
-
-static void Usage(const char *prog)
-{
-	cout << "Usage: " << prog << " -f <input file> -o <output file> -t <seconds> [-r <seed>]"
-	     << endl
-	     << "  -f  input file with the instance" << endl
-	     << "  -o  output file where the best solution is written" << endl
-	     << "  -t  maximum running time T, in seconds" << endl
-	     << "  -r  seed of the random number generator (default 1)" << endl;
-}
 
 // Reads all the tokens of the file, ignoring the lines that start with '#'.
 static bool ReadTokens(const string &filename, vector<string> &tokens)
@@ -182,73 +170,23 @@ static bool WriteSolution(const string &filename, const BinPackingData &data)
 
 int main(int argc, char *argv[])
 {
-	// Args Parsing
-	string infile, outfile;
-	double T = -1.0;
-	unsigned seed = 1;
-	for (int i = 1; i < argc; i++)
-	{
-		string arg = argv[i];
-		if (arg == "-f" && i + 1 < argc)
-			infile = argv[++i];
-		else if (arg == "-o" && i + 1 < argc)
-			outfile = argv[++i];
-		else if (arg == "-t" && i + 1 < argc)
-		{
-			const char *text = argv[++i];
-			char *end = nullptr;
-			errno = 0;
-			T = strtod(text, &end);
-			// steady_clock duration and deadline arithmetic must be representable.
-			double max_seconds = chrono::duration<double>(chrono::steady_clock::time_point::max() -
-			                                              chrono::steady_clock::now())
-			                         .count();
-			if (errno || end == text || *end || !isfinite(T) || T < 0 || T >= max_seconds)
-			{
-				cerr << "Invalid time limit\n";
-				return 1;
-			}
-		}
-		else if (arg == "-r" && i + 1 < argc)
-		{
-			const char *text = argv[++i];
-			char *end = nullptr;
-			errno = 0;
-			unsigned long value = strtoul(text, &end, 10);
-			if (errno || end == text || *end || text[0] == '-' ||
-			    value > numeric_limits<unsigned>::max())
-			{
-				cerr << "Invalid seed\n";
-				return 1;
-			}
-			seed = static_cast<unsigned>(value);
-		}
-		else
-		{
-			cout << "Unknown or incomplete argument: " << arg << endl;
-			Usage(argv[0]);
-			return 1;
-		}
-	}
-	if (infile.empty() || outfile.empty() || T < 0)
-	{
-		Usage(argv[0]);
+	const auto options = ParseCommandLine(argc, argv);
+	if (!options)
 		return 1;
-	}
 
 	// Reads the instance
 	BinPackingData data;
 	string err;
-	if (!ReadInstance(infile, data, err))
+	if (!ReadInstance(options->input_file, data, err))
 	{
-		cout << "Error reading " << infile << ": " << err << endl;
+		cout << "Error reading " << options->input_file << ": " << err << endl;
 		return 1;
 	}
-	data.seed = seed;
+	data.seed = options->seed;
 	cout << "Instance: n = " << data.n << ", C = " << data.C << ", k = " << data.k
 	     << " conflict classes; lower bound " << data.lower_bound << endl;
 
-	SolveBinPacking(data, T);
+	SolveBinPacking(data, options->time_limit);
 
 	// The solution returned by the solver is checked here, independently.
 	if (data.best_solution.empty())
@@ -268,9 +206,9 @@ int main(int argc, char *argv[])
 	}
 	cout << "Feasible solution with " << data.best_value << " bins (lower bound "
 	     << data.lower_bound << ")" << endl;
-	if (!WriteSolution(outfile, data))
+	if (!WriteSolution(options->output_file, data))
 	{
-		cout << "Error: cannot write " << outfile << endl;
+		cout << "Error: cannot write " << options->output_file << endl;
 		return 1;
 	}
 	return 0;

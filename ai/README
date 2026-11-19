@@ -1,11 +1,18 @@
 Transparência de uso de IA
 
 Esta pasta contém a transcrição cronológica dos prompts do usuário, respostas
-do assistente e chamadas/resultados de ferramentas da sessão usada no trabalho.
-conversa.jsonl preserva os conteúdos; conversa.md oferece a versão legível.
+do assistente e chamadas/resultados de ferramentas das sessões usadas no trabalho.
+conversa-AAAA-MM-DD.jsonl preserva os conteúdos; conversa-AAAA-MM-DD.md oferece
+a versão legível. A data corresponde ao primeiro registro da sessão.
 Não se trata de um resumo nem de uma lista apenas de prompts. Instruções
 internas do aplicativo, metadados de consumo e raciocínio interno não fazem
-parte da conversa exportada. estado.json indica se o turno já foi encerrado.
+parte da conversa exportada. estado-AAAA-MM-DD.json indica se o turno já foi encerrado.
+
+conversa-2026-11-19.jsonl, conversa-2026-11-19.md e estado-2026-11-19.json
+correspondem à sessão de 19/11/2026,
+que inclui a extração do parsing do main e as notas sobre manutenibilidade.
+A sessão anterior foi preservada integralmente em conversa-2026-11-11.jsonl,
+conversa-2026-11-11.md e estado-2026-11-11.json. Leia as sessões por data.
 
 O script testes/empacotar.py permite atualizar a exportação diretamente do
 JSONL local, sem conexões externas e sem modificar o registro original:
@@ -17,7 +24,8 @@ e o ZIP assim que a última resposta do assistente é registrada. A gravação
 usa substituição atômica do ZIP. Não inicie um novo turno antes de concluir
 essa atualização se quiser guardar exatamente a primeira conversa.
 
-Para futuras sessões, preserve antes os arquivos conversa.* com nomes
-cronológicos distintos e exporte a sessão seguinte. Inclua também qualquer
+O exportador inclui a data nos nomes automaticamente. Para sessões distintas
+iniciadas no mesmo dia, preserve antes os arquivos com um sufixo adicional.
+Inclua também qualquer
 outra conversa de IA usada pelo aluno fora deste ambiente. Este registro
-cobre apenas o trabalho efetivamente feito nesta sessão.
+cobre apenas as sessões exportadas nesta pasta.

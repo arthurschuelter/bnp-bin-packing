@@ -19,8 +19,8 @@ nova tarefa de implementar o algoritmo desde o início.
 
 - Os arquivos atuais do projeto, inclusive alterações ainda não commitadas.
 - As decisões técnicas, verificações e pendências descritas aqui.
-- Os prompts, respostas e ferramentas disponíveis em `ai/conversa.md` e
-  `ai/conversa.jsonl`, em ordem cronológica.
+- Os prompts, respostas e ferramentas disponíveis em `ai/conversa-AAAA-MM-DD.md`
+  e `ai/conversa-AAAA-MM-DD.jsonl`, em ordem cronológica.
 - Configurações de formatação, lint e VS Code.
 
 Não transfere uma instância de modelo em execução, raciocínio interno,
@@ -78,7 +78,17 @@ a estrutura de entrega do enunciado.
 
 Funções: `SolveBinPacking` em `binpacksolver.cpp`; `Node`, `Groups`, `Pricing`,
 `certifiedBound` e `BranchAndPrice` em `branchprice.cpp`; dados e verificador
-em `binpacking.h`; CLI/leitura/gravação em `main.cpp`.
+em `binpacking.h`; parsing e validação da CLI em `commandline.h/.cpp`;
+leitura/gravação e coordenação em `main.cpp`.
+
+Atualização de 19/11/2026: o parsing antes embutido em `main` foi extraído
+para `ParseCommandLine`, com retorno `std::optional<CommandLineOptions>`.
+Opções, validações, mensagens e código de saída foram preservados; o Makefile,
+README e mapa de estudo foram atualizados. `make format-check` passou e
+`make test GUROBI_HOME=/opt/gurobi1303/linux64` passou nas 187 instâncias,
+incluindo os checks da CLI. Os testes exigiram execução fora do sandbox para
+a licença reconhecer o HostID. `make lint` com esse Gurobi terminou sem erros,
+com cinco avisos nos arquivos do solver e nenhum no módulo extraído.
 
 ## Pedidos atendidos ao longo do chat
 
@@ -176,7 +186,7 @@ estrita da formatação e diagnósticos.
 
 > Este é o projeto de Bin Packing com Classes de Conflito que já desenvolvemos.
 > Leia AGENTS.md e docs/CONTEXTO_CODEX.md, confira README e o estado atual dos
-> arquivos. Consulte ai/conversa.md se precisar do histórico detalhado. Não
+> arquivos. Consulte ai/conversa-AAAA-MM-DD.md se precisar do histórico detalhado. Não
 > reimplemente do zero nem descarte alterações locais. Ajude-me a continuar
 > a partir desse estado e primeiro verifique os caminhos das dependências
 > neste computador. Minha próxima tarefa é: [descreva aqui].

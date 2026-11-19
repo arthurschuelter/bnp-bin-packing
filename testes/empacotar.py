@@ -43,10 +43,13 @@ def read_records(session):
 
 def export(session):
     records, complete = read_records(session)
+    if not records:
+        raise ValueError(f'Session has no conversation records: {session}')
+    date = records[0]['timestamp'][:10]
     folder = ROOT / AI
     folder.mkdir(exist_ok=True)
-    (folder / 'conversa.jsonl').write_text(''.join(json.dumps(record, ensure_ascii=False) + '\n'
-                                                for record in records))
+    (folder / f'conversa-{date}.jsonl').write_text(''.join(json.dumps(record, ensure_ascii=False) + '\n'
+                                                        for record in records))
     sections = ['# Conversa com IA\n\nRegistro cronológico dos prompts, respostas e ferramentas.\n']
     for record in records:
         label = record.get('role', record['type'])
@@ -60,8 +63,8 @@ def export(session):
         else:
             # JSON also preserves exact newlines/escaping of tool inputs/outputs.
             sections.append('```json\n' + json.dumps(record, ensure_ascii=False, indent=2) + '\n```\n')
-    (folder / 'conversa.md').write_text('\n'.join(sections))
-    (folder / 'estado.json').write_text(json.dumps(dict(
+    (folder / f'conversa-{date}.md').write_text('\n'.join(sections))
+    (folder / f'estado-{date}.json').write_text(json.dumps(dict(
         session=session.name, records=len(records), turn_complete=complete), indent=2) + '\n')
     return complete
 

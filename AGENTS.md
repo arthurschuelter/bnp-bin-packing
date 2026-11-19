@@ -2,7 +2,7 @@
 
 Antes de trabalhar, leia `docs/CONTEXTO_CODEX.md`. Ele registra o objetivo,
 as decisões, as verificações realizadas e as pendências desta conversa.
-Para detalhes históricos, consulte `ai/conversa.md` conforme necessário.
+Para detalhes históricos, consulte `ai/conversa-AAAA-MM-DD.md` conforme necessário.
 O código e o enunciado têm precedência sobre resumos que possam estar antigos.
 
 - Converse com o usuário em português. O trabalho já está implementado;

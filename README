@@ -55,8 +55,12 @@ O exemplo retorna valor 4 e limitante 4.
 
 ARQUIVOS E ALGORITMO
 
+src/commandline.h e src/commandline.cpp: opções da linha de comando, parsing,
+validação de tempo/semente e mensagem de uso. ParseCommandLine retorna as
+opções validadas ou std::nullopt após informar o erro ou mostrar o uso.
+
 src/main.cpp: leitor/verificador/gravador do código-base, com validação de
-números, tempo, semente e remoção de repetições nas classes. Classes vazias,
+números e remoção de repetições nas classes. Classes vazias,
 sobrepostas e descrições com mais ocorrências que n são aceitas, desde que os
 índices sejam válidos. A contagem de uma classe refere-se às ocorrências lidas.
 
@@ -197,7 +201,7 @@ extraído; o script de testes detecta ambas as estruturas.
 Os originais e enunciado.pdf permanecem na área de trabalho e não precisam
 ser duplicados no arquivo final.
 
-ai/conversa.jsonl e ai/conversa.md registram os prompts, respostas e chamadas
+ai/conversa-AAAA-MM-DD.jsonl e ai/conversa-AAAA-MM-DD.md registram os prompts, respostas e chamadas
 de ferramentas desta sessão em ordem cronológica, sem resumos. O exportador
 lê o registro local da sessão explicitamente indicada (veja ai/README).
 Ele não inclui instruções internas do aplicativo ou raciocínio interno.
