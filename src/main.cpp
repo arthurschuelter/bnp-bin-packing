@@ -168,13 +168,29 @@ static bool WriteSolution(const string &filename, const BinPackingData &data)
 	return true;
 }
 
+void LogResults(const BinPackingData &data) {
+	std::cout << "[Solver] Bins: \n";
+	for (size_t b = 0; b < data.best_solution.size(); b++)
+	{
+		printf("%3d: [", static_cast<int>(b));
+		for (size_t a = 0; a < data.best_solution[b].size(); a++)
+			std::cout << (a ? ", " : "") << data.best_solution[b][a];
+		std::cout << "]\n";
+	}
+
+	std::cout << "[Solver] Feasible solution with " << data.best_value << "bins" << endl
+		 << "\t LB=" << data.lower_bound << "; UB=" << data.best_value
+	     << (data.best_value <= data.lower_bound 
+				? " (optimality proven)" : " (feasible, optimality not proven)") << endl
+		<< "\t Total time: " << data.elapsed << endl;
+}
+
 int main(int argc, char *argv[])
 {
 	const auto options = ParseCommandLine(argc, argv);
 	if (!options)
 		return 1;
 
-	// Reads the instance
 	BinPackingData data;
 	string err;
 	if (!ReadInstance(options->input_file, data, err))
@@ -188,8 +204,7 @@ int main(int argc, char *argv[])
 
 	SolveBinPacking(data, options->time_limit);
 
-	// The solution returned by the solver is checked here, independently.
-	if (data.best_solution.empty())
+	if (!data.HasSolution())
 	{
 		cout << "Error: the solver did not return any solution" << endl;
 		return 1;
@@ -204,8 +219,9 @@ int main(int argc, char *argv[])
 		cout << "Error: best_value does not match the number of bins" << endl;
 		return 1;
 	}
-	cout << "Feasible solution with " << data.best_value << " bins (lower bound "
-	     << data.lower_bound << ")" << endl;
+
+	LogResults(data);
+
 	if (!WriteSolution(options->output_file, data))
 	{
 		cout << "Error: cannot write " << options->output_file << endl;
