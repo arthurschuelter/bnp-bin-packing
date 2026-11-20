@@ -14,10 +14,29 @@ que inclui a extração do parsing do main e as notas sobre manutenibilidade.
 A sessão anterior foi preservada integralmente em conversa-2026-11-11.jsonl,
 conversa-2026-11-11.md e estado-2026-11-11.json. Leia as sessões por data.
 
+Sessões com o Claude Code (19 e 20/11/2026) estão nos arquivos com sufixo
+claude-<id>, um conjunto por sessão (as datas seguem o horário UTC do primeiro
+registro):
+
+    conversa-2026-11-19-claude-b23f7db1  leitura do template/enunciado e início
+    conversa-2026-11-20-claude-f1cb294a  seleção de nós por profundidade (Node::depth)
+    conversa-2026-11-20-claude-05ee6b53  instância difícil com UB 22 e OPT 21
+    conversa-2026-11-20-claude-5ecdec1e  status != GRB_OPTIMAL no laço de colunas
+    conversa-2026-11-20-claude-9980d17d  HasSolution, instâncias medium/hard,
+                                         log de tempo, roundingHeuristics
+
+Na exportação do Claude Code ficam os prompts, as respostas e as chamadas e
+resultados de ferramentas; raciocínio interno, anexos de contexto e lembretes
+do sistema (<system-reminder>) são removidos.
+
 O script testes/empacotar.py permite atualizar a exportação diretamente do
 JSONL local, sem conexões externas e sem modificar o registro original:
 
     python3 testes/empacotar.py --sessao /caminho/da/sessao.jsonl
+
+Ele reconhece tanto o formato do Codex quanto o do Claude Code
+(~/.claude/projects/<projeto>/<id>.jsonl). Use --sufixo claude-<id> para não
+sobrescrever outra sessão da mesma data.
 
 Na preparação inicial foi usado também --aguardar-fim, que atualiza a conversa
 e o ZIP assim que a última resposta do assistente é registrada. A gravação

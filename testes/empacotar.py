@@ -2,6 +2,7 @@
 """Package only submission sources/text; optionally export this Codex session."""
 import argparse
 import json
+import re
 from pathlib import Path
 import time
 import zipfile
@@ -12,7 +13,85 @@ AI = 'ai' if (ROOT / 'ai').is_dir() else 'ia'
 ALLOWED = {'.cpp', '.h', '.py', '.txt', '.md', '.json', '.jsonl', '.pdf'}
 
 
+REMINDER = re.compile(r'<system-reminder>.*?</system-reminder>\s*', re.S)
+
+
+def _clean(text):
+    # Internal application instructions are not part of the conversation.
+    return REMINDER.sub('', text).strip()
+
+
+def _tool_output(content):
+    if isinstance(content, str):
+        return _clean(content)
+    parts = []
+    for part in content or []:
+        if isinstance(part, dict) and part.get('type') == 'text':
+            parts.append(_clean(part['text']))
+        elif isinstance(part, dict):
+            parts.append(f"[{part.get('type', 'conteúdo')} omitido]")
+    return '\n'.join(parts)
+
+
+def read_claude_records(session):
+    """Claude Code transcript: keeps prompts, answers and tool calls/results;
+    drops thinking, attachments, system entries and request metadata."""
+    records = []
+    complete = False
+    for line in session.read_text().splitlines():
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        kind = item.get('type')
+        if kind not in ('user', 'assistant') or item.get('isMeta') or item.get('isSidechain'):
+            continue
+        message = item.get('message', {})
+        content = message.get('content')
+        stamp = item.get('timestamp')
+        if isinstance(content, str):
+            content = [dict(type='text', text=content)]
+        for part in content or []:
+            if not isinstance(part, dict):
+                continue
+            ptype = part.get('type')
+            if ptype == 'text':
+                text = _clean(part['text'])
+                if text:
+                    records.append(dict(timestamp=stamp, type='message', role=kind,
+                                        content=[dict(type='text', text=text)]))
+            elif ptype == 'tool_use':
+                records.append(dict(timestamp=stamp, type='function_call', call_id=part.get('id'),
+                                    name=part.get('name'),
+                                    arguments=json.dumps(part.get('input', {}), ensure_ascii=False)))
+            elif ptype == 'tool_result':
+                records.append(dict(timestamp=stamp, type='function_call_output',
+                                    call_id=part.get('tool_use_id'),
+                                    output=_tool_output(part.get('content'))))
+        if kind == 'assistant':
+            complete = message.get('stop_reason') == 'end_turn'
+        elif any(isinstance(p, dict) and p.get('type') in ('text', 'tool_result')
+                 for p in content or []):
+            complete = False
+    return records, complete
+
+
+def is_claude_session(session):
+    for line in session.read_text().splitlines():
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if item.get('type') in ('response_item', 'event_msg', 'session_meta'):
+            return False
+        if item.get('type') in ('user', 'assistant') and 'message' in item:
+            return True
+    return False
+
+
 def read_records(session):
+    if is_claude_session(session):
+        return read_claude_records(session)
     records = []
     complete = False
     for line in session.read_text().splitlines():
@@ -41,11 +120,11 @@ def read_records(session):
     return records, complete
 
 
-def export(session):
+def export(session, suffix=''):
     records, complete = read_records(session)
     if not records:
         raise ValueError(f'Session has no conversation records: {session}')
-    date = records[0]['timestamp'][:10]
+    date = records[0]['timestamp'][:10] + (f'-{suffix}' if suffix else '')
     folder = ROOT / AI
     folder.mkdir(exist_ok=True)
     (folder / f'conversa-{date}.jsonl').write_text(''.join(json.dumps(record, ensure_ascii=False) + '\n'
@@ -101,20 +180,22 @@ def package():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sessao', type=Path, help='Explicit local session JSONL to export')
+    parser.add_argument('--sufixo', default='',
+                        help='Extra name suffix (conversa-AAAA-MM-DD-SUFIXO) for sessions on the same day')
     parser.add_argument('--aguardar-fim', action='store_true',
                         help='Refresh export and archive once the active turn finishes (up to 10 minutes)')
     args = parser.parse_args()
     if args.aguardar_fim and args.sessao is None:
         parser.error('--aguardar-fim requires --sessao')
     if args.sessao:
-        complete = export(args.sessao)
+        complete = export(args.sessao, args.sufixo)
         package()
         if args.aguardar_fim:
             end = time.monotonic() + 600
             while not complete and time.monotonic() < end:
                 time.sleep(0.5)
                 _, complete = read_records(args.sessao)
-            export(args.sessao)
+            export(args.sessao, args.sufixo)
     output = package()
     print(f'Created {output.name}; only sources, scripts, instances and documentation.')
 
