@@ -1,0 +1,80 @@
+
+Gurobi 13.0.3 (linux64, gurobi_cl) logging started Thu Nov 19 18:23:15 2026
+
+Set parameter Username
+Set parameter LicenseID to value 2862124
+Set parameter TimeLimit to value 240
+Set parameter LogFile to value "gurobi.log"
+Set parameter Threads to value 4
+Using license file /home/tuca/gurobi.lic
+Academic license - for non-commercial use only - expires 2027-09-09
+
+Gurobi Optimizer version 13.0.3 build v13.0.3rc0 (linux64 - "CachyOS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Warning: Numeric variable name in LP file ('0') - often the result
+         of a constant term in the left-hand side of a constraint.
+
+Read LP format model from file /tmp/claude-1000/-home-tuca-Documents-bnp-bin-packing/b23f7db1-3b44-49f7-86ea-eb1aaaf0a185/scratchpad/m60.lp
+Reading time = 0.00 seconds
+obj: 291 rows, 1261 columns, 3486 nonzeros
+
+Using Gurobi shared library /opt/gurobi1303/linux64/lib/libgurobi.so.13.0.3
+
+CPU model: AMD Ryzen 5 3600 6-Core Processor, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 4 threads
+
+Non-default parameters:
+TimeLimit  240
+Threads  4
+
+Optimize a model with 291 rows, 1261 columns and 3486 nonzeros (Min)
+Model fingerprint: 0x4ffa4618
+Model has 1 linear objective coefficients
+Variable types: 1 continuous, 1260 integer (1260 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+
+Presolve removed 22 rows and 215 columns
+Presolve time: 0.01s
+Presolved: 269 rows, 1046 columns, 2912 nonzeros
+Variable types: 0 continuous, 1046 integer (1046 binary)
+
+Root relaxation: objective 0.000000e+00, 177 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0   22          -    0.00000      -     -    0s
+     0     0    0.00000    0   34          -    0.00000      -     -    0s
+     0     0    0.00000    0   30          -    0.00000      -     -    0s
+     0     0    0.00000    0   27          -    0.00000      -     -    0s
+     0     0    0.00000    0   19          -    0.00000      -     -    0s
+     0     0    0.00000    0   21          -    0.00000      -     -    0s
+     0     0    0.00000    0   40          -    0.00000      -     -    0s
+     0     0    0.00000    0   31          -    0.00000      -     -    0s
+     0     0    0.00000    0   31          -    0.00000      -     -    0s
+     0     0    0.00000    0   31          -    0.00000      -     -    0s
+     0     2    0.00000    0   18          -    0.00000      -     -    0s
+H17008   222                       0.0000000    0.00000  0.00%  12.0    2s
+
+Cutting planes:
+  Cover: 47
+  MIR: 5
+  Knapsack: 13
+  StrongCG: 3
+  Flow cover: 10
+  GUB cover: 11
+  RLT: 8
+  Relax-and-lift: 1
+
+Explored 17084 nodes (207193 simplex iterations) in 2.48 seconds (4.16 work units)
+Thread count was 4 (of 12 available processors)
+
+Solution count 1: 0 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%

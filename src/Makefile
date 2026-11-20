@@ -13,10 +13,14 @@ CLANG_FORMAT ?= clang-format
 TIDYFLAGS ?=
 # Treat vendor headers as system headers for linting, keeping their warnings out.
 LINTFLAGS = $(filter-out -I$(GUROBI_HOME)/include,$(CPPFLAGS)) $(CXXFLAGS) -isystem "$(GUROBI_HOME)/include"
-INPUT ?= ../testes/instancias/dificil.txt
-OUTPUT ?= ../dificil.txt
+
+TEST_FILE = medium-1
+INPUT ?= ../testes/instancias/$(TEST_FILE).txt
+OUTPUT ?= ../tests-results/$(TEST_FILE).txt
+
 TIME ?= 60
 SEED ?= 1
+
 .PHONY: all clean test run lint format format-check
 all: binpack
 binpack: $(SOURCES) $(HEADERS)

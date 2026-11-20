@@ -41,6 +41,7 @@ class BinPackingData
 	int best_value;
 	std::vector<std::vector<int>> best_solution;
 	int lower_bound;
+	double elapsed;
 
 	BinPackingData() : n(0), C(0), k(0), seed(1), best_value(1), lower_bound(0) {}
 

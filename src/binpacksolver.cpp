@@ -7,6 +7,7 @@
 #include "binpacksolver.h"
 #include "branchprice.h"
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <numeric>
 #include <random>
@@ -155,4 +156,6 @@ void SolveBinPacking(BinPackingData &data, double time_limit)
 	RandomizedFFD(data, 1000, min(0.25, time_limit * 0.05), start);
 	if (data.best_value > data.lower_bound && chrono::steady_clock::now() < deadline)
 		BranchAndPrice(data, deadline);
+
+	data.elapsed = chrono::duration<double>(chrono::steady_clock::now() - start).count();
 }

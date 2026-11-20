@@ -270,6 +270,58 @@ std::size_t addHeuristicColumns(const Pricing &pricing, std::mt19937_64 &rng, co
 	return added;
 }
 
+static void roundingHeuristics(BinPackingData &data, const std::set<Pattern> &pool, GRBEnv &env,
+	Clock::time_point deadline, double max_seconds) 
+{
+		double left = std::chrono::duration<double>(deadline - Clock::now()).count();
+		if (left <= 0) { 
+			return; 
+		}
+
+        GRBModel mip(env);
+        mip.set(GRB_DoubleParam_TimeLimit, std::min(max_seconds, left));
+        mip.set(GRB_DoubleParam_Cutoff, data.best_value - 0.5);
+
+		std::vector<GRBConstr> cover(data.n + 1);
+        for (int i = 1; i <= data.n; ++i) {
+			cover[i] = mip.addConstr(GRBLinExpr(0.0) >= 1.0);
+		}
+
+		std::vector<const Pattern *> cols;
+        std::vector<GRBVar> y;
+        for (const auto &p : pool)
+        {
+                GRBColumn c;
+                for (int i : p)
+                        c.addTerm(1.0, cover[i]);
+                y.push_back(mip.addVar(0.0, 1.0, 1.0, GRB_BINARY, c));
+                cols.push_back(&p);
+        }
+
+        mip.optimize();
+        if (mip.get(GRB_IntAttr_SolCount) == 0) {
+			return; 
+		}
+
+		std::vector<bool> placed(data.n + 1, false);
+        std::vector<Pattern> bins;
+        for (size_t k = 0; k < y.size(); ++k)
+                if (y[k].get(GRB_DoubleAttr_X) > 0.5)
+                {
+                        Pattern b;
+                        for (int i : *cols[k])
+                                if (!placed[i])
+                                        placed[i] = true, b.push_back(i);
+                        if (!b.empty())
+                                bins.push_back(b);
+                }
+
+		std::string error;
+        if (data.CheckSolution(bins, error) && (int)bins.size() < data.best_value) {
+			data.UpdateBest(bins);
+		}
+
+}
  
 int certifiedBound(const std::vector<double> &u, long double alpha, int inherited)
 {
@@ -288,7 +340,7 @@ struct Stats
 
 void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 {
-	std::cout << "Starting BranchAndPrice\n";
+	std::cout << "Starting Branch-and-Price\n";
 	std::priority_queue<Node, std::vector<Node>, BestBound> open;
 	unsigned long long next_id = 1;
 	open.push(Node{{}, {}, data.lower_bound, 0, 0}
@@ -309,8 +361,8 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 	try
 	{
 		GRBEnv env(true);
-		env.set(GRB_IntParam_OutputFlag, 0);
-		// env.set(GRB_IntParam_OutputFlag, 1);
+		// env.set(GRB_IntParam_OutputFlag, 0);
+		env.set(GRB_IntParam_OutputFlag, 1);
 		env.set(GRB_IntParam_Threads, 1);
 		env.start();
 		DeadlineCallback callback(deadline);
@@ -396,6 +448,8 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 					solved = true;
 					break;
 				}
+
+				// Heuristic Pricing
 				const auto added = addHeuristicColumns(pricing, rng, add);
 				stats.heuristic += added;
 				if (added > 0)
@@ -405,6 +459,8 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 					stopped = true;
 					break;
 				}
+				
+				// Exact Pricing
 				++stats.exact;
 				pricing.exact();
 				node.bound = certifiedBound(dual, pricing.upper, node.bound);
@@ -429,7 +485,7 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 					stopped = true;
 					break;
 				}
-				// Exact pricing certified convergence. Read the primal only now.
+
 				std::vector<double> x(vars.size());
 				bool integral = true;
 				for (size_t p = 0; p < vars.size(); ++p)
@@ -438,6 +494,16 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 					if (std::abs(x[p] - std::round(x[p])) > INT_EPS)
 						integral = false;
 				}
+
+				// Rounding Heuristics
+				if (node.depth == 0 || stats.nodes % 50 == 0) {
+					roundingHeuristics(data, pool, env, deadline, 5.0);
+					if (node.bound >= data.best_value) {
+						solved = true;
+						break;
+					}
+				}
+
 				if (integral)
 				{
 					std::vector<Pattern> bins;
@@ -471,16 +537,21 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 				if (pair.first < 0)
 					throw std::runtime_error("no fractional Ryan-Foster pair (numerical issue)");
 				int i = groups.items[pair.first].front(), j = groups.items[pair.second].front();
+
 				Node together = node, apart = node;
+				
 				together.together.emplace_back(i, j);
 				together.id = next_id++;
 				together.depth = node.depth + 1;
+				
 				apart.apart.emplace_back(i, j);
 				apart.id = next_id++;
 				apart.depth = node.depth + 1;
+				
 				open.pop();
 				open.push(std::move(together));
 				open.push(std::move(apart));
+				
 				++stats.branches;
 				solved = true;
 				branched = true;
