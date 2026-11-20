@@ -232,7 +232,7 @@ Um nó pode ser encerrado quando:
 
 No terceiro caso, a solução é expandida para itens originais e verificada antes de atualizar a incumbente.
 
-A fila prioriza o menor limitante conhecido, com desempate pela criação. Os filhos herdam o LB do pai: adicionar restrições não pode diminuir o ótimo do subproblema.
+A fila prioriza o menor limitante conhecido; em empate, escolhe o nó mais profundo (mergulho tipo DFS, que tende a achar soluções inteiras mais cedo) e, depois, o criado primeiro. Os filhos herdam o LB do pai: adicionar restrições não pode diminuir o ótimo do subproblema.
 
 Enquanto um nó é processado, ele permanece representado na fila. Só é removido se encerrado ou substituído pelos **dois filhos**. Caso o tempo acabe, sua subárvore continua contribuindo para a cota global.
 

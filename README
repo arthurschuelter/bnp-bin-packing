@@ -120,7 +120,7 @@ src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
    das colunas que contêm os dois grupos, e escolhe-se o par mais próximo
    de 1/2. O filho "juntos" funde os grupos; o "separados" acrescenta conflito.
    Ambos os filhos herdam todas as decisões do pai. A fila explora o menor
-   limitante, com desempate pela ordem de criação.
+   limitante; empates favorecem o nó mais profundo e, depois, a ordem de criação.
 
 8. Fronteira: um nó continua representado na fila enquanto é processado.
    Ele só sai se resolvido/podado ou substituído pelos DOIS filhos. Na

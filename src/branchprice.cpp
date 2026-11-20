@@ -1,5 +1,6 @@
 // Set partitioning branch-and-price. Only continuous variables reach Gurobi.
 #include "branchprice.h"
+#include "binpacking.h"
 #include "gurobi_c++.h"
 #include <algorithm>
 #include <cmath>
@@ -32,13 +33,16 @@ struct Node
 {
 	std::vector<std::pair<int, int>> together, apart;
 	int bound;
+	int depth = 0;
 	unsigned long long id;
 };
 struct BestBound
 {
 	bool operator()(const Node &a, const Node &b) const
 	{
-		return a.bound != b.bound ? a.bound > b.bound : a.id > b.id;
+		return a.bound != b.bound   ? a.bound > b.bound
+		       : a.depth != b.depth ? a.depth < b.depth
+		                            : a.id > b.id;
 	}
 };
 struct Groups
@@ -266,6 +270,7 @@ std::size_t addHeuristicColumns(const Pricing &pricing, std::mt19937_64 &rng, co
 	return added;
 }
 
+ 
 int certifiedBound(const std::vector<double> &u, long double alpha, int inherited)
 {
 	long double sum = 0;
@@ -286,7 +291,8 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 	std::cout << "Starting BranchAndPrice\n";
 	std::priority_queue<Node, std::vector<Node>, BestBound> open;
 	unsigned long long next_id = 1;
-	open.push(Node{{}, {}, data.lower_bound, 0});
+	open.push(Node{{}, {}, data.lower_bound, 0, 0}
+	);
 	std::set<Pattern> pool;
 	for (int i = 1; i <= data.n; ++i)
 		pool.insert({i});
@@ -468,8 +474,10 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 				Node together = node, apart = node;
 				together.together.emplace_back(i, j);
 				together.id = next_id++;
+				together.depth = node.depth + 1;
 				apart.apart.emplace_back(i, j);
 				apart.id = next_id++;
+				apart.depth = node.depth + 1;
 				open.pop();
 				open.push(std::move(together));
 				open.push(std::move(apart));
