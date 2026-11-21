@@ -35,6 +35,19 @@ registro):
                                          usuário; turn_complete=false)
     conversa-2026-11-21-claude-1142a896  README e Makefile Linux/macOS,
                                          make test/make run, revisão da entrega
+    conversa-2026-11-21-claude-dec4ee03  verificação do que falta para a entrega,
+                                         atualização dos documentos, itens 2, 3
+                                         e 4 do RELATORIO_BUGS (nós estacionados,
+                                         orçamento da FFD, herança de colunas e
+                                         primal simplex), exportação desta pasta
+    conversa-2026-11-21-claude-4a5a4022  pergunta sobre adaptar o branch-and-price
+                                         para problemas de scheduling (iniciada
+                                         durante a sessão dec4ee03)
+
+Não foram exportadas: uma sessão do Claude Code de 21/11 (b5dff6c3) com um
+único prompt de teste ("asdasd") e nenhuma resposta; uma sessão do Codex de
+10/11 vazia; e uma do Codex de 20/11 sobre a configuração do terminal Ghostty,
+sem relação com o projeto.
 
 Na exportação do Claude Code ficam os prompts, as respostas e as chamadas e
 resultados de ferramentas; raciocínio interno, anexos de contexto e lembretes
