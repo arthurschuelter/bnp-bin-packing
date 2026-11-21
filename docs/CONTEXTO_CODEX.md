@@ -119,6 +119,12 @@ ramificações e todas as saídas com UB=LB=OPT do oráculo `--exato`.
 medium-3 com `-t 30` provou o ótimo em 2,6 s e 1,4 s (sementes 1 e 2),
 contra 4,4 s e 2,2 s antes. O modelo ainda é recriado em cada nó.
 
+Atualização de 21/11/2026 (item 2 do relatório): falha local não encerra
+mais o B&P. Nós com falha vão para `parked` com a cota certificada e entram
+no LB global; o status do PL é classificado (prazo × numérico, com nova
+tentativa); coluna repetida e falta de par fracionário são tratadas sem
+abortar. `BNP_FAULT_NODE=k` injeta falha para teste; `verificar.py` cobre isso.
+
 ## Pedidos atendidos ao longo do chat
 
 1. Implementação e organização da entrega, preservando os originais.
@@ -188,9 +194,8 @@ nenhum commit, descarte, envio de e-mail ou publicação foi feito pelo assisten
   (dois avisos), exceção `TimeExpired` sem base `std::exception`, reserva de
   vetor, catch vazio e campo não inicializado em `binpacking.h:46`.
   Alguns comportamentos são intencionais, mas precisam ser examinados.
-- Itens abertos de `RELATORIO_BUGS.md`: 2 (status do PL diferente de ótimo
-  encerra todo o B&P), 3 (orçamento da FFD), 4 (resolvido em parte: falta
-  reaproveitar o modelo entre nós), 7, 8 e 9. Os itens 1, 5 e 6 foram resolvidos; o 10, em parte.
+- Itens abertos de `RELATORIO_BUGS.md`: 3 (orçamento da FFD), 4 (resolvido em parte: falta
+  reaproveitar o modelo entre nós), 7, 8 e 9. Os itens 1, 2, 5 e 6 foram resolvidos; o 10, em parte.
 - Prazo T: inicialização de licença e operações nativas são cooperativas.
   Nas medições de 21/11 o término ficou em T+0,01 s, mas não foi demonstrado
   um término rígido em T para todas as entradas, apesar do requisito literal

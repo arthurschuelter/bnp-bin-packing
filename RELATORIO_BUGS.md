@@ -5,7 +5,7 @@ Revisão feita em 19/11/2026 sobre o commit `371106c`, comparando o código com
 tinha sido aplicada; o texto de cada seção descreve o problema como foi
 encontrado e a sugestão de solução.
 
-**Status atualizado em 21/11/2026** (commit `41d35f3`): os itens 1, 5 e 6
+**Status atualizado em 21/11/2026** (commit `41d35f3`): os itens 1, 2, 5 e 6
 foram resolvidos e o 4 e o 10 foram resolvidos em parte; os demais continuam abertos.
 A coluna "Status" da tabela e a linha **Status** no início de cada seção
 registram isso. Os números de linha citados referem-se ao commit `371106c`
@@ -21,7 +21,7 @@ no **desempenho da árvore**, na **robustez** e na **configuração e documenta�
 | # | Severidade | Problema | Onde (em `371106c`) | Status |
 |---|---|---|---|---|
 | 1 | Alta | A árvore é percorrida praticamente em largura e não tem heurística primal. O ótimo não é encontrado mesmo com o LB já correto. | `branchprice.cpp:37-43`, `:467-475` | Resolvido |
-| 2 | Média | Uma falha em um único nó (status do LP diferente de ótimo, exceção numérica) encerra todo o B&P. | `branchprice.cpp:378-382`, `:413`, `:466` | Aberto |
+| 2 | Média | Uma falha em um único nó (status do LP diferente de ótimo, exceção numérica) encerra todo o B&P. | `branchprice.cpp:378-382`, `:413`, `:466` | Resolvido |
 | 3 | Média | O orçamento da heurística FFD pode impedir até uma rodada completa, deixando só a solução unitária. | `binpacksolver.cpp:149-155` | Aberto |
 | 4 | Média | O modelo é reconstruído do zero em cada nó e o pool inteiro é varrido; o método simplex escolhido é inadequado para geração de colunas. | `branchprice.cpp:330-368` | Parcial |
 | 5 | Média | Um `make` simples falha no Linux, porque o `GUROBI_HOME` padrão é o caminho do macOS. | `src/Makefile:4`, `src/compile_flags.txt` | Resolvido |
@@ -99,7 +99,7 @@ não detecta isso, porque as instâncias dela são pequenas.
 
 ## 2. Uma falha local aborta todo o B&P (MÉDIA)
 
-**Status (21/11/2026):** Aberto. Um status diferente de `GRB_OPTIMAL` ainda marca `stopped` e encerra a busca. Os erros "pricing repeated" e "no fractional Ryan-Foster pair" ainda saem do B&P. O LB devolvido continua válido.
+**Status (21/11/2026):** Resolvido. Cada nó tem `try/catch` próprio. Uma falha local (`GRBException`, `NodeFailure`) estaciona o nó na lista `parked` com sua cota certificada e a busca continua. O LB global é o mínimo sobre `open` e `parked`. Status do PL: `GRB_TIME_LIMIT`/`GRB_INTERRUPTED` param tudo; os demais geram uma nova tentativa com `reset`, `NumericFocus=3` e `Method=1`. Coluna repetida: o nó é tratado como convergido dentro da tolerância (Farley vale para qualquer dual); a solução inteira só fecha o nó se a cota alcançar a incumbente. Solução inteira inviável: ramifica. Sem par fracionário acima de `INT_EPS`: usa o par menos integral; se não houver, estaciona. O resumo `[B&P]` mostra `failed=`. Teste: `BNP_FAULT_NODE=k` simula a falha; `verificar.py` cobre k = 1, 2 e 3 em `ryan_foster` (a busca continua, a saída é viável, LB < UB). Sem regressão em `make test` e no estresse de 60 instâncias com ramificação.
 
 **Problema.** Três situações terminam a busca inteira, e não só o nó atual:
 

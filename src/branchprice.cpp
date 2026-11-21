@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
+#include <cstdlib>
 #include <functional>
 #include <iostream>
 #include <map>
@@ -25,6 +26,12 @@ constexpr double RC_EPS = 1e-7;
 constexpr double INT_EPS = 1e-6;
 struct TimeExpired
 {
+};
+// A failure confined to one node (numerical trouble, Gurobi error). The node is
+// parked with its certified bound and the search continues with the others.
+struct NodeFailure : std::runtime_error
+{
+	using std::runtime_error::runtime_error;
 };
 void checkTime(Clock::time_point deadline)
 {
@@ -360,8 +367,21 @@ int certifiedBound(const std::vector<double> &u, long double alpha, int inherite
 
 struct Stats
 {
-	size_t nodes = 0, lp = 0, heuristic = 0, exact = 0, branches = 0;
+	size_t nodes = 0, lp = 0, heuristic = 0, exact = 0, branches = 0, failed = 0;
 };
+
+// Test hook: BNP_FAULT_NODE=k makes the k-th processed node fail after its
+// first LP, so the tests can check that the search survives a local failure.
+size_t faultNode()
+{
+	const char *value = std::getenv("BNP_FAULT_NODE");
+	return value ? std::strtoull(value, nullptr, 10) : 0;
+}
+
+bool deadlineStatus(int status)
+{
+	return status == GRB_TIME_LIMIT || status == GRB_INTERRUPTED;
+}
 } // namespace
 
 void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
@@ -382,6 +402,10 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 
 	Stats stats;
 	std::mt19937_64 rng(data.seed);
+	const size_t fault_node = faultNode();
+	// Nodes whose processing failed. They are never discarded: their bounds
+	// still enter the global lower bound, so no subtree is lost.
+	std::vector<Node> parked;
 
 	try
 	{
@@ -404,207 +428,274 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 			// replaced by BOTH children. Thus timeouts cannot lose a subtree bound.
 			open.push(node);
 			++stats.nodes;
-			Groups groups(data, node, deadline);
-			if (!groups.valid)
+			try
 			{
-				open.pop();
-				continue;
-			}
-			GRBModel model(env);
-			model.setCallback(&callback);
-			// Primal simplex: a new column keeps the previous basis primal feasible
-			// (it enters at zero), so the column-generation loop reuses the basis.
-			model.set(GRB_IntParam_Method, 0);
-			model.set(GRB_DoubleParam_FeasibilityTol, 1e-9);
-			model.set(GRB_DoubleParam_OptimalityTol, 1e-9);
-			std::vector<GRBConstr> rows;
-			for (size_t g = 0; g < groups.items.size(); ++g)
-				rows.push_back(model.addConstr(GRBLinExpr(0.0) == 1.0));
-			model.update();
-			std::set<Pattern> local;
-			std::vector<Pattern> patterns;
-			std::vector<GRBVar> vars;
-			ColumnList master; // pool entries of this master, in the order of vars
-			auto add = [&](Pattern p)
-			{
-				std::sort(p.begin(), p.end());
-				if (!local.insert(p).second)
-					return false;
-				GRBColumn column;
-				for (int g : p)
-					column.addTerm(1.0, rows[g]);
-				vars.push_back(model.addVar(0.0, GRB_INFINITY, 1.0, GRB_CONTINUOUS, column));
-				patterns.push_back(p);
-				master.push_back(&*pool.insert(groups.expand(p)).first);
-				return true;
-			};
-			for (size_t g = 0; g < groups.items.size(); ++g)
-			{
-				checkTime(deadline);
-				add({static_cast<int>(g)});
-			}
-			// The root scans the global pool; any other node starts from the parent's
-			// master filtered by its decision (Lemma 8: a child only loses columns).
-			// Any admissible subset is valid here: the exact pricing certifies the bound.
-			ColumnList candidates;
-			if (node.columns)
-				candidates = *node.columns;
-			else
-				for (const auto &p : pool)
-					candidates.push_back(&p);
-			for (const Pattern *p : candidates)
-			{
-				checkTime(deadline);
-				Pattern q;
-				if (groups.admissible(*p, q))
-					add(q);
-			}
-			bool solved = false, stopped = false, branched = false;
-			while (Clock::now() < deadline)
-			{
-				model.set(
-				    GRB_DoubleParam_TimeLimit,
-				    std::max(0.0, std::chrono::duration<double>(deadline - Clock::now()).count()));
-				model.optimize();
-				++stats.lp;
-				if (model.get(GRB_IntAttr_Status) != GRB_OPTIMAL)
+				Groups groups(data, node, deadline);
+				if (!groups.valid)
 				{
-					stopped = true;
-					break;
-				}
-				std::vector<double> dual(rows.size());
-				for (size_t g = 0; g < rows.size(); ++g)
-					dual[g] = rows[g].get(GRB_DoubleAttr_Pi);
-				Pricing pricing(groups, dual, data.C, deadline);
-				node.bound = certifiedBound(dual, pricing.upper, node.bound);
-				if (node.bound >= data.best_value)
-				{
-					solved = true;
-					break;
-				}
-
-				// Heuristic Pricing
-				const auto added = addHeuristicColumns(pricing, rng, add);
-				stats.heuristic += added;
-				if (added > 0)
+					open.pop();
 					continue;
-				if (Clock::now() >= deadline)
-				{
-					stopped = true;
-					break;
 				}
-
-				// Exact Pricing
-				++stats.exact;
-				pricing.exact();
-				node.bound = certifiedBound(dual, pricing.upper, node.bound);
-				if (node.bound >= data.best_value)
+				GRBModel model(env);
+				model.setCallback(&callback);
+				// Primal simplex: a new column keeps the previous basis primal feasible
+				// (it enters at zero), so the column-generation loop reuses the basis.
+				model.set(GRB_IntParam_Method, 0);
+				model.set(GRB_DoubleParam_FeasibilityTol, 1e-9);
+				model.set(GRB_DoubleParam_OptimalityTol, 1e-9);
+				std::vector<GRBConstr> rows;
+				for (size_t g = 0; g < groups.items.size(); ++g)
+					rows.push_back(model.addConstr(GRBLinExpr(0.0) == 1.0));
+				model.update();
+				std::set<Pattern> local;
+				std::vector<Pattern> patterns;
+				std::vector<GRBVar> vars;
+				ColumnList master; // pool entries of this master, in the order of vars
+				auto add = [&](Pattern p)
 				{
-					solved = true;
-					break;
+					std::sort(p.begin(), p.end());
+					if (!local.insert(p).second)
+						return false;
+					GRBColumn column;
+					for (int g : p)
+						column.addTerm(1.0, rows[g]);
+					vars.push_back(model.addVar(0.0, GRB_INFINITY, 1.0, GRB_CONTINUOUS, column));
+					patterns.push_back(p);
+					master.push_back(&*pool.insert(groups.expand(p)).first);
+					return true;
+				};
+				for (size_t g = 0; g < groups.items.size(); ++g)
+				{
+					checkTime(deadline);
+					add({static_cast<int>(g)});
 				}
-				if (pricing.best > 1 + RC_EPS)
+				// The root scans the global pool; any other node starts from the parent's
+				// master filtered by its decision (Lemma 8: a child only loses columns).
+				// Any admissible subset is valid here: the exact pricing certifies the bound.
+				ColumnList candidates;
+				if (node.columns)
+					candidates = *node.columns;
+				else
+					for (const auto &p : pool)
+						candidates.push_back(&p);
+				for (const Pattern *p : candidates)
 				{
-					if (!add(pricing.best_pattern))
-						throw std::runtime_error("pricing repeated a negative reduced-cost column");
-					if (!pricing.complete)
+					checkTime(deadline);
+					Pattern q;
+					if (groups.admissible(*p, q))
+						add(q);
+				}
+				bool solved = false, stopped = false, branched = false;
+				while (Clock::now() < deadline)
+				{
+					model.set(
+					    GRB_DoubleParam_TimeLimit,
+					    std::max(0.0,
+						         std::chrono::duration<double>(deadline - Clock::now()).count()));
+					model.optimize();
+					++stats.lp;
+					int status = model.get(GRB_IntAttr_Status);
+					if (status != GRB_OPTIMAL && !deadlineStatus(status))
+					{
+						// Numerical trouble: retry from scratch with safer settings.
+						std::cerr << "Node " << node.id << ": LP status " << status
+						          << "; retrying with NumericFocus=3\n";
+						model.reset();
+						model.set(GRB_IntParam_NumericFocus, 3);
+						model.set(GRB_IntParam_Method, 1);
+						model.optimize();
+						++stats.lp;
+						status = model.get(GRB_IntAttr_Status);
+					}
+					if (deadlineStatus(status))
 					{
 						stopped = true;
 						break;
 					}
-					continue;
-				}
-				if (!pricing.complete)
-				{
-					stopped = true;
-					break;
-				}
-
-				std::vector<double> x(vars.size());
-				bool integral = true;
-				for (size_t p = 0; p < vars.size(); ++p)
-				{
-					x[p] = vars[p].get(GRB_DoubleAttr_X);
-					if (std::abs(x[p] - std::round(x[p])) > INT_EPS)
-						integral = false;
-				}
-
-				// Rounding Heuristics
-				if (node.depth == 0 || stats.nodes % 50 == 0)
-				{
-					roundingHeuristics(data, pool, env, deadline, 5.0);
+					if (status != GRB_OPTIMAL)
+						throw NodeFailure("LP status " + std::to_string(status));
+					if (stats.nodes == fault_node)
+						throw GRBException("injected fault (BNP_FAULT_NODE)", 0);
+					std::vector<double> dual(rows.size());
+					for (size_t g = 0; g < rows.size(); ++g)
+						dual[g] = rows[g].get(GRB_DoubleAttr_Pi);
+					Pricing pricing(groups, dual, data.C, deadline);
+					node.bound = certifiedBound(dual, pricing.upper, node.bound);
 					if (node.bound >= data.best_value)
 					{
 						solved = true;
 						break;
 					}
-				}
 
-				if (integral)
-				{
-					std::vector<Pattern> bins;
+					// Heuristic Pricing
+					const auto added = addHeuristicColumns(pricing, rng, add);
+					stats.heuristic += added;
+					if (added > 0)
+						continue;
+					if (Clock::now() >= deadline)
+					{
+						stopped = true;
+						break;
+					}
+
+					// Exact Pricing
+					++stats.exact;
+					pricing.exact();
+					node.bound = certifiedBound(dual, pricing.upper, node.bound);
+					if (node.bound >= data.best_value)
+					{
+						solved = true;
+						break;
+					}
+					// A repeated column means the pricing and the LP disagree only within
+					// their tolerances. The Farley bound above holds for ANY dual vector,
+					// so it stays certified; the node is treated as converged.
+					bool tolerance_stop = false;
+					if (pricing.best > 1 + RC_EPS)
+					{
+						if (add(pricing.best_pattern))
+						{
+							if (!pricing.complete)
+							{
+								stopped = true;
+								break;
+							}
+							continue;
+						}
+						tolerance_stop = true;
+						std::cerr << "Node " << node.id
+						          << ": pricing repeated a column; converged within tolerance\n";
+					}
+					if (!pricing.complete)
+					{
+						stopped = true;
+						break;
+					}
+
+					std::vector<double> x(vars.size());
+					bool integral = true;
+					for (size_t p = 0; p < vars.size(); ++p)
+					{
+						x[p] = vars[p].get(GRB_DoubleAttr_X);
+						if (std::abs(x[p] - std::round(x[p])) > INT_EPS)
+							integral = false;
+					}
+
+					// Rounding Heuristics
+					if (node.depth == 0 || stats.nodes % 50 == 0)
+					{
+						roundingHeuristics(data, pool, env, deadline, 5.0);
+						if (node.bound >= data.best_value)
+						{
+							solved = true;
+							break;
+						}
+					}
+
+					if (integral)
+					{
+						std::vector<Pattern> bins;
+						for (size_t p = 0; p < x.size(); ++p)
+							if (x[p] > 0.5)
+								bins.push_back(groups.expand(patterns[p]));
+						std::string error;
+						if (data.CheckSolution(bins, error))
+						{
+							data.UpdateBest(bins);
+							// With exact convergence the integral LP closes the node. After a
+							// tolerance stop, only the certified bound may close it.
+							if (!tolerance_stop || node.bound >= data.best_value)
+							{
+								solved = true;
+								break;
+							}
+							throw NodeFailure("integral LP without certified convergence");
+						}
+						// Not a valid packing (numerical noise in x): branch instead.
+						std::cerr << "Node " << node.id
+						          << ": rounded LP solution rejected: " << error << '\n';
+					}
+					std::map<std::pair<int, int>, double> phi;
 					for (size_t p = 0; p < x.size(); ++p)
-						if (x[p] > 0.5)
-							bins.push_back(groups.expand(patterns[p]));
-					std::string error;
-					if (!data.CheckSolution(bins, error))
-						throw std::runtime_error(error);
-					data.UpdateBest(bins);
+						if (x[p] > 1e-9)
+							for (size_t a = 0; a < patterns[p].size(); ++a)
+								for (size_t b = a + 1; b < patterns[p].size(); ++b)
+									phi[{patterns[p][a], patterns[p][b]}] += x[p];
+					std::pair<int, int> pair{-1, -1};
+					double distance = 1;
+					for (auto entry : phi)
+					{
+						double v = entry.second;
+						if (v > INT_EPS && v < 1 - INT_EPS && std::abs(v - 0.5) < distance)
+						{
+							pair = entry.first;
+							distance = std::abs(v - 0.5);
+						}
+					}
+					if (pair.first < 0)
+					{
+						// All phi are within INT_EPS of 0/1: take the least integral one.
+						double best = 1e-9;
+						for (auto entry : phi)
+						{
+							const double v = std::min(entry.second, 1 - entry.second);
+							if (v > best)
+							{
+								pair = entry.first;
+								best = v;
+							}
+						}
+					}
+					if (pair.first < 0)
+						throw NodeFailure("no fractional Ryan-Foster pair");
+					int i = groups.items[pair.first].front(), j = groups.items[pair.second].front();
+
+					Node together = node, apart = node;
+
+					together.together.emplace_back(i, j);
+					together.id = next_id++;
+					together.depth = node.depth + 1;
+					together.columns = inheritColumns(master, i, j, true);
+
+					apart.apart.emplace_back(i, j);
+					apart.id = next_id++;
+					apart.depth = node.depth + 1;
+					apart.columns = inheritColumns(master, i, j, false);
+
+					open.pop();
+					open.push(std::move(together));
+					open.push(std::move(apart));
+
+					++stats.branches;
 					solved = true;
+					branched = true;
 					break;
 				}
-				std::map<std::pair<int, int>, double> phi;
-				for (size_t p = 0; p < x.size(); ++p)
-					if (x[p] > 1e-9)
-						for (size_t a = 0; a < patterns[p].size(); ++a)
-							for (size_t b = a + 1; b < patterns[p].size(); ++b)
-								phi[{patterns[p][a], patterns[p][b]}] += x[p];
-				std::pair<int, int> pair{-1, -1};
-				double distance = 1;
-				for (auto entry : phi)
-				{
-					double v = entry.second;
-					if (v > INT_EPS && v < 1 - INT_EPS && std::abs(v - 0.5) < distance)
-					{
-						pair = entry.first;
-						distance = std::abs(v - 0.5);
-					}
-				}
-				if (pair.first < 0)
-					throw std::runtime_error("no fractional Ryan-Foster pair (numerical issue)");
-				int i = groups.items[pair.first].front(), j = groups.items[pair.second].front();
-
-				Node together = node, apart = node;
-
-				together.together.emplace_back(i, j);
-				together.id = next_id++;
-				together.depth = node.depth + 1;
-				together.columns = inheritColumns(master, i, j, true);
-
-				apart.apart.emplace_back(i, j);
-				apart.id = next_id++;
-				apart.depth = node.depth + 1;
-				apart.columns = inheritColumns(master, i, j, false);
-
+				if (branched)
+					continue; // parent already replaced by both children
 				open.pop();
-				open.push(std::move(together));
-				open.push(std::move(apart));
-
-				++stats.branches;
-				solved = true;
-				branched = true;
-				break;
+				if (!solved)
+				{
+					open.push(node);
+					stopped = true;
+				}
+				if (stopped)
+					break;
 			}
-			if (branched)
-				continue; // parent already replaced by both children
-			open.pop();
-			if (!solved)
+			catch (const TimeExpired &)
 			{
-				open.push(node);
-				stopped = true;
+				throw; // deadline: stop the whole search
 			}
-			if (stopped)
-				break;
+			catch (const std::exception &e) // GRBException, NodeFailure, ...
+			{
+				// The node is still on top of the frontier (children are pushed only
+				// after every step that can throw). Park it with its certified bound.
+				std::cerr << "Node " << node.id << " failed: " << e.what()
+				          << ". Parked; the search continues.\n";
+				open.pop();
+				parked.push_back(node);
+				++stats.failed;
+			}
 		}
 	}
 	catch (const TimeExpired &)
@@ -620,11 +711,17 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 	{
 		std::cerr << "Search interrupted: " << e.what() << ". Returning certified frontier.\n";
 	}
-	data.lower_bound =
-	    open.empty() ? data.best_value
-		             : std::max(data.lower_bound, std::min(data.best_value, open.top().bound));
+	// Global bound: the smallest bound among the unresolved nodes, open or parked.
+	// The tree is exhausted (LB = UB) only when both sets are empty.
+	int frontier = data.best_value;
+	if (!open.empty())
+		frontier = std::min(frontier, open.top().bound);
+	for (const Node &n : parked)
+		frontier = std::min(frontier, n.bound);
+	data.lower_bound = std::max(data.lower_bound, frontier);
 	std::cout << "[B&P] nodes=" << stats.nodes << " LPs=" << stats.lp
 	          << " heuristic_columns=" << stats.heuristic << " exact_calls=" << stats.exact
-	          << " branches=" << stats.branches << " pool=" << pool.size()
-	          << " LB=" << data.lower_bound << " UB=" << data.best_value << '\n';
+	          << " branches=" << stats.branches << " failed=" << stats.failed
+	          << " pool=" << pool.size() << " LB=" << data.lower_bound << " UB=" << data.best_value
+	          << '\n';
 }

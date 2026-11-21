@@ -3,6 +3,7 @@
 import argparse
 import functools
 import json
+import os
 from pathlib import Path
 import random
 import re
@@ -151,6 +152,20 @@ def main():
             assert process.returncode == 0, process.stdout + process.stderr
             check_output(output, sizes, capacity, classes, 3)
             assert time.monotonic()-begin < float(limit)+1.0
+        # Fault injection (BNP_FAULT_NODE=k fails the k-th node): the failed node is
+        # parked, the search goes on with the other nodes, the output stays
+        # feasible, and LB never exceeds OPT nor claims optimality (LB < UB here).
+        sizes, capacity, classes = read_instance(ROOT / 'instancias/ryan_foster.txt')
+        for fault, min_nodes in [('1', 1), ('2', 3), ('3', 3)]:
+            process = subprocess.run([binary, '-f', str(ROOT/'instancias/ryan_foster.txt'),
+                                      '-o', str(output), '-t', '5'], capture_output=True, text=True,
+                                     timeout=8, env=dict(os.environ, BNP_FAULT_NODE=fault))
+            assert process.returncode == 0, process.stdout + process.stderr
+            assert 'failed=1' in process.stdout and 'Parked' in process.stderr, process.stdout
+            nodes = int(re.search(r'nodes=(\d+)', process.stdout)[1])
+            assert nodes >= min_nodes, ('search stopped after the fault', fault, nodes)
+            lb, ub = check_output(output, sizes, capacity, classes, 6)
+            assert lb < ub, ('parked node must keep the gap open', fault, lb, ub)
         # Parser conventions: duplicates beyond n are ignored, empty classes,
         # leading whitespace comments and maximum 64-bit capacity.
         instance.write_text('  # duplicates\n2 9223372036854775807 2\n'
@@ -171,11 +186,11 @@ def main():
             assert subprocess.run(command,capture_output=True).returncode != 0
     report = dict(cases=len(results), skipped=skipped, branches=branch_count, exact_calls=exact_count,
                   randomized_seed=20261111, results=results,
-                  additional_checks=['timeouts', 'overflow', 'duplicates', 'invalid input', 'CLI'])
+                  additional_checks=['timeouts', 'fault injection', 'overflow', 'duplicates', 'invalid input', 'CLI'])
     if args.report:
         args.report.write_text(json.dumps(report, indent=2) + '\n')
     print(f'OK: {len(results)} optima certified; {branch_count} branches; '
-          f'{exact_count} exact pricing calls; timeouts/parser/overflow/CLI verified.')
+          f'{exact_count} exact pricing calls; timeouts/faults/parser/overflow/CLI verified.')
 
 
 if __name__ == '__main__':

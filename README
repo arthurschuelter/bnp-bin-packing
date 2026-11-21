@@ -147,6 +147,26 @@ src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
    é a cota global; se a fila esvazia, LB=UB. Assim, um pricing interrompido
    não faz desaparecer uma subárvore nem certifica um ótimo indevidamente.
 
+   Falha local: um problema em UM nó não encerra a busca. Cada nó é
+   processado dentro de um try/catch próprio. Uma GRBException ou NodeFailure
+   tira o nó da fila e o "estaciona" (lista parked) com sua cota certificada;
+   a busca segue com os demais. A cota global é o mínimo sobre os nós abertos
+   E estacionados, então a subárvore estacionada continua limitando o LB, e
+   LB=UB só ocorre se ambos se esvaziam ou a incumbente alcança essas cotas.
+   O resumo [B&P] mostra failed=. Casos tratados:
+   - PL com status diferente de ótimo: GRB_TIME_LIMIT e GRB_INTERRUPTED
+     significam prazo esgotado e param tudo; outros (NUMERIC, SUBOPTIMAL...)
+     geram uma nova tentativa com reset, NumericFocus=3 e dual simplex; se
+     falhar de novo, o nó é estacionado.
+   - Pricing exato repete uma coluna do mestre: pricing e PL divergem só pela
+     tolerância. A cota de Farley vale para QUALQUER vetor dual, então já está
+     certificada; o nó é tratado como convergido. Uma solução inteira só fecha
+     esse nó se a cota certificada alcançar a incumbente.
+   - Solução "inteira" que não passa em CheckSolution: ramifica em vez de abortar.
+   - Nenhum phi fora de [INT_EPS, 1-INT_EPS]: usa o par menos integral
+     (> 1e-9); se nem esse existir, estaciona o nó.
+   Para testes, BNP_FAULT_NODE=k no ambiente simula uma falha no k-ésimo nó.
+
 9. Heurística MIP de arredondamento (roundingHeuristics): quando a geração
    de colunas do nó converge (pricing exato sem coluna negativa), no nó raiz
    e nos nós em que o contador de nós processados é múltiplo de 50 (ou seja,
@@ -174,8 +194,10 @@ Gurobi TimeLimit e callbacks são cooperativos: inicialização de licença,
 rotinas nativas, alocação, ordenação e escalonamento do sistema operacional
 podem causar pequena ultrapassagem. Não se promete um prazo rígido de tempo
 real para essas operações. A busca não começa novas iterações após o prazo.
-Em erro do Gurobi, a incumbente e uma cota válida são preservadas, com aviso
-em stderr; isso não significa que a busca exata foi concluída.
+Em erro do Gurobi num nó, o nó é estacionado e a busca continua (item 8);
+num erro global (licença, ambiente), a incumbente e uma cota válida são
+preservadas. Em ambos há aviso em stderr, e LB<UB indica que a busca exata
+não foi concluída.
 
 O grafo entre grupos ocupa memória quadrática; o banco global de colunas e
 a árvore podem crescer bastante. Não foram implementadas estabilização dual
@@ -205,8 +227,9 @@ make run. A instância ryan_foster.txt é a junção de dois ciclos de cinco
 vértices: PL=5 e OPT=6; exige explorar a ramificação, incluindo os dois
 filhos. O relatório testes/resultados.json (21/11/2026) registra
 1 ramificação e 104 chamadas de pricing exato no total. Também testa T=0,
-0,001, 0,03 e 0,1 s, classes repetidas, comentários, entrada/CLI inválidas
-e capacidade 2^63-1.
+0,001, 0,03 e 0,1 s, classes repetidas, comentários, entrada/CLI inválidas,
+capacidade 2^63-1 e injeção de falha (BNP_FAULT_NODE=1, 2 e 3 em
+ryan_foster: a busca continua, a saída é viável e LB fica abaixo de UB).
 
 O relatório testes/resultados-sanitizers.json é de 11/11/2026 (macOS, Apple
 clang 17.0.0, Gurobi 13.0.2, Python 3.14.8), anterior à heurística de

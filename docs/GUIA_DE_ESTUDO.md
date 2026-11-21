@@ -240,13 +240,17 @@ A fila prioriza o menor limitante conhecido; em empate, escolhe o nó mais profu
 
 Enquanto um nó é processado, ele permanece representado na fila. Só é removido se encerrado ou substituído pelos **dois filhos**. Caso o tempo acabe, sua subárvore continua contribuindo para a cota global.
 
-Se existem nós abertos:
+**Falha em um nó.** Se o processamento de um nó falhar (erro do Gurobi, PL que continua sem status ótimo depois de uma nova tentativa com `NumericFocus=3`, nenhum par para ramificar), ele sai da fila e vai para a lista `parked` com a cota que já tinha sido certificada. A busca continua com os outros nós. Descartá-lo seria errado: a subárvore dele poderia conter o ótimo, e o LB global ficaria alto demais. Devolvê-lo à fila faria o programa escolhê-lo de novo e falhar em laço.
+
+Uma observação útil aqui: a cota de Farley vale para **qualquer** vetor dual `u` com `u(B) ≤ α` para todo `B`, não só para o dual ótimo, porque `u/α` é dual viável e a dualidade fraca basta. Por isso, quando o pricing exato "repete" uma coluna que já está no mestre (divergência de tolerância entre o PL e o pricing), a cota já calculada continua certificada e o nó pode seguir para a ramificação. A ramificação também não exige `x` ótimo: o Lema 8 vale para qualquer par.
+
+Se existem nós abertos ou estacionados:
 
 $$
-LB_{global}=\min\{UB,\min_{N\text{ aberto}}LB_N\}.
+LB_{global}=\min\{UB,\min_{N\text{ aberto ou estacionado}}LB_N\}.
 $$
 
-O código preserva também a cota inicial. Se a fila esvaziou, `LB_global=UB`.
+O código preserva também a cota inicial. Se a fila e a lista de estacionados se esvaziaram, `LB_global=UB`.
 
 Não se deve usar a cota do último nó visitado ou a maior cota da fila como limite global: pode existir outra subárvore ainda aberta com ótimo menor.
 
