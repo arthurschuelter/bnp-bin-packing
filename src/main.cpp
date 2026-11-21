@@ -15,6 +15,7 @@
 #include <climits>
 #include <cstdlib>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <set>
 #include <sstream>
@@ -168,21 +169,54 @@ static bool WriteSolution(const string &filename, const BinPackingData &data)
 	return true;
 }
 
-void LogResults(const BinPackingData &data) {
-	std::cout << "[Solver] Bins: \n";
-	for (size_t b = 0; b < data.best_solution.size(); b++)
-	{
-		printf("%3d: [", static_cast<int>(b));
-		for (size_t a = 0; a < data.best_solution[b].size(); a++)
-			std::cout << (a ? ", " : "") << data.best_solution[b][a];
-		std::cout << "]\n";
-	}
+// Prints every bin with its load (sum of the item sizes) against the capacity
+// C, followed by a summary of the occupation and the bounds of the run.
+static void LogResults(const BinPackingData &data)
+{
+	const size_t bins = data.best_solution.size();
+	const int width = static_cast<int>(to_string(data.C).size());
+	const int index_width = static_cast<int>(to_string(bins).size());
+	// long double: the total may exceed LLONG_MAX when C is close to it.
+	long double total = 0;
+	long long min_load = data.C, max_load = 0;
+	size_t full = 0;
 
-	std::cout << "[Solver] Feasible solution with " << data.best_value << "bins" << endl
-		 << "\t LB=" << data.lower_bound << "; UB=" << data.best_value
-	     << (data.best_value <= data.lower_bound 
-				? " (optimality proven)" : " (feasible, optimality not proven)") << endl
-		<< "\t Total time: " << data.elapsed << endl;
+	cout << "[Solver] Bins (load/C, occupation, items):\n";
+	for (size_t b = 0; b < bins; b++)
+	{
+		long long load = 0;
+		for (int i : data.best_solution[b])
+			load += data.size[i];
+		total += load;
+		min_load = min(min_load, load);
+		max_load = max(max_load, load);
+		if (load == data.C)
+			++full;
+
+		cout << "  " << setw(index_width) << b << ": " << setw(width) << load << "/" << data.C
+		     << " (" << fixed << setprecision(1) << setw(5) << 100.0L * load / data.C << "%) [";
+		for (size_t a = 0; a < data.best_solution[b].size(); a++)
+			cout << (a ? ", " : "") << data.best_solution[b][a];
+		cout << "]\n";
+	}
+	if (bins == 0)
+		min_load = 0;
+
+	const long double capacity = static_cast<long double>(data.C) * bins;
+	cout << "[Solver] Feasible solution with " << data.best_value << " bins\n"
+	     << "\t Total load: " << setprecision(0) << total << " of " << bins << " x " << data.C
+	     << " (" << setprecision(1) << (bins ? 100.0L * total / capacity : 0.0L)
+	     << "% occupation)\n"
+	     << "\t Load per bin: min=" << min_load << ", max=" << max_load
+	     << ", avg=" << setprecision(1) << (bins ? total / bins : 0.0L) << "; full bins: " << full
+	     << "\n"
+	     << "\t LB=" << data.lower_bound << "; UB=" << data.best_value
+	     << (data.best_value <= data.lower_bound ? " (optimality proven)"
+	                                             : " (feasible, optimality not proven)")
+	     << "\n"
+	     << "\t Total time: " << setprecision(3) << data.elapsed << " s" << endl;
+	cout.unsetf(ios::floatfield);
+	cout << setprecision(6);
 }
 
 int main(int argc, char *argv[])

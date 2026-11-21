@@ -8,13 +8,19 @@ Não se trata de um resumo nem de uma lista apenas de prompts. Instruções
 internas do aplicativo, metadados de consumo e raciocínio interno não fazem
 parte da conversa exportada. estado-AAAA-MM-DD.json indica se o turno já foi encerrado.
 
+As sessões do Codex abertas em 11/11/2026 às 17:56 e às 18:18, no horário
+de São Paulo, estão nos arquivos com sufixos codex-17-56 e codex-18-18.
+A sessão da manhã permanece nos arquivos de 11/11 sem sufixo.
+A sessão do Codex de 21/11/2026 às 09:30 (revisão do projeto para a entrega)
+está nos arquivos com sufixo codex-09-30.
+
 conversa-2026-11-19.jsonl, conversa-2026-11-19.md e estado-2026-11-19.json
 correspondem à sessão de 19/11/2026,
 que inclui a extração do parsing do main e as notas sobre manutenibilidade.
 A sessão anterior foi preservada integralmente em conversa-2026-11-11.jsonl,
 conversa-2026-11-11.md e estado-2026-11-11.json. Leia as sessões por data.
 
-Sessões com o Claude Code (19 e 20/11/2026) estão nos arquivos com sufixo
+Sessões com o Claude Code (19 a 21/11/2026) estão nos arquivos com sufixo
 claude-<id>, um conjunto por sessão (as datas seguem o horário UTC do primeiro
 registro):
 
@@ -23,7 +29,12 @@ registro):
     conversa-2026-11-20-claude-05ee6b53  instância difícil com UB 22 e OPT 21
     conversa-2026-11-20-claude-5ecdec1e  status != GRB_OPTIMAL no laço de colunas
     conversa-2026-11-20-claude-9980d17d  HasSolution, instâncias medium/hard,
-                                         log de tempo, roundingHeuristics
+                                         log de tempo, roundingHeuristics,
+                                         log de cargas por recipiente (main.cpp)
+    conversa-2026-11-21-claude-5f9bf747  revisão do README (interrompida pelo
+                                         usuário; turn_complete=false)
+    conversa-2026-11-21-claude-1142a896  README e Makefile Linux/macOS,
+                                         make test/make run, revisão da entrega
 
 Na exportação do Claude Code ficam os prompts, as respostas e as chamadas e
 resultados de ferramentas; raciocínio interno, anexos de contexto e lembretes

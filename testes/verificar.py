@@ -12,6 +12,9 @@ import time
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT.parent / ('src' if (ROOT.parent / 'src').is_dir() else 'codigo')
+# The subset-DP oracle is exponential (2^n memory, 3^n time): larger fixed
+# instances (medium-*, hard-*) are for experiments with make run, not for it.
+ORACLE_MAX_ITEMS = 16
 
 
 def read_instance(path):
@@ -92,7 +95,15 @@ def main():
     branch_count = exact_count = 0
     with tempfile.TemporaryDirectory(prefix='bnp-test-') as directory:
         directory = Path(directory)
-        cases = [(path.stem, *read_instance(path)) for path in sorted((ROOT / 'instancias').glob('*.txt'))]
+        cases, skipped = [], []
+        for path in sorted((ROOT / 'instancias').glob('*.txt')):
+            case = (path.stem, *read_instance(path))
+            if len(case[1]) <= ORACLE_MAX_ITEMS:
+                cases.append(case)
+            else:
+                skipped.append(path.stem)
+        if skipped:
+            print(f'Skipping (n > {ORACLE_MAX_ITEMS}, beyond the oracle): {", ".join(skipped)}')
         for index in range(args.random):
             n = rng.randint(4, 12)
             capacity = rng.randint(5, 20)
@@ -158,7 +169,7 @@ def main():
             command = [binary, '-f', str(ROOT/'instancias/exemplo.txt'), '-o', str(output), '-t','1']
             command += [option,value]
             assert subprocess.run(command,capture_output=True).returncode != 0
-    report = dict(cases=len(results), branches=branch_count, exact_calls=exact_count,
+    report = dict(cases=len(results), skipped=skipped, branches=branch_count, exact_calls=exact_count,
                   randomized_seed=20261111, results=results,
                   additional_checks=['timeouts', 'overflow', 'duplicates', 'invalid input', 'CLI'])
     if args.report:

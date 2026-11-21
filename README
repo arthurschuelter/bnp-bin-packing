@@ -11,27 +11,35 @@ exemplos, roteiro de verificação e exercícios com respostas.
 COMPILAR E EXECUTAR
 
 Requer compilador C++17, GNU Make e Gurobi com licença válida para os PLs.
-Configuração padrão deste ambiente:
+O Makefile funciona em Linux e macOS: detecta o sistema por uname e usa a
+versão mais recente do Gurobi instalada no local padrão
+(/opt/gurobiXYZ/linux64 no Linux, /Library/gurobiXYZ/macos_universal2 no
+macOS). O nome da biblioteca (por exemplo, gurobi130) é deduzido de
+$(GUROBI_HOME)/lib. Neste ambiente: GUROBI_HOME=/opt/gurobi1303/linux64.
 
     cd src
     make
     ./binpack -f ../testes/instancias/exemplo.txt -o /tmp/saida.txt -t 60
     ./binpack -f ../testes/instancias/ryan_foster.txt -o /tmp/rf.txt -t 60 -r 42
 
-Para compilar e executar o exemplo com os parâmetros preenchidos:
+Para compilar e executar uma instância com os parâmetros preenchidos:
 
     make run
 
 Na área de trabalho, o comando também funciona a partir da raiz. No pacote
-extraído, execute-o em codigo/. Os padrões são INPUT=../testes/instancias/exemplo.txt,
-OUTPUT=../saida.txt, TIME=60 e SEED=1. Para personalizar (caminhos relativos
-são interpretados a partir de src/):
+extraído, execute-o em codigo/. Os padrões são TEST_FILE=medium-1,
+INPUT=../testes/instancias/$(TEST_FILE).txt,
+OUTPUT=../tests-results/$(TEST_FILE).txt, TIME=60 e SEED=1. Para escolher
+outra instância de testes/instancias/, basta trocar TEST_FILE; os demais
+parâmetros também podem ser sobrescritos (caminhos relativos são
+interpretados a partir de src/):
 
-    make run INPUT=../testes/instancias/ryan_foster.txt OUTPUT=../saida-rf.txt TIME=30 SEED=42
+    make run TEST_FILE=ryan_foster TIME=30 SEED=42
+    make run INPUT=../testes/instancias/exemplo.txt OUTPUT=../saida.txt
 
-A instalação e o nome da biblioteca são configuráveis, inclusive no Linux:
+Para uma instalação fora do local padrão, informe-a explicitamente:
 
-    make GUROBI_HOME=/caminho/gurobi1302/linux64 GUROBI_LIB=gurobi130
+    make GUROBI_HOME=/caminho/gurobi1303/linux64 GUROBI_LIB=gurobi130
 
 Se necessário, execute make clean antes de trocar de instalação/compilador.
 GUROBI_HOME também pode ser exportada no ambiente. O Makefile configura o
@@ -76,8 +84,9 @@ solução da heurística são usadas para inicializar o mestre.
 src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
 
 1. Formulação: min soma_B x_B, soma_{B contendo i} x_B = 1 para cada item.
-   O algoritmo resolve relaxações com x_B >= 0. Somente variáveis CONTÍNUAS
-   são criadas no Gurobi; nenhuma chamada ao MIP é usada. O solver usa dual
+   O algoritmo resolve relaxações com x_B >= 0. O mestre restrito tem somente
+   variáveis CONTÍNUAS (é um PL); o único MIP é a heurística de arredondamento
+   do item 9, que não participa dos limitantes. O solver do mestre usa dual
    simplex, uma thread, tolerâncias primal/dual 1e-9 e reotimização incremental.
 
 2. Grupos: componentes das decisões "juntos" são contraídas por union-find.
@@ -128,6 +137,19 @@ src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
    é a cota global; se a fila esvazia, LB=UB. Assim, um pricing interrompido
    não faz desaparecer uma subárvore nem certifica um ótimo indevidamente.
 
+9. Heurística MIP de arredondamento (roundingHeuristics): quando a geração
+   de colunas do nó converge (pricing exato sem coluna negativa), no nó raiz
+   e nos nós em que o contador de nós processados é múltiplo de 50 (ou seja,
+   uma vez a cada 50 nós), o Gurobi resolve um MIP de cobertura com uma variável binária por coluna do
+   banco global (soma_{B contendo i} y_B >= 1, min soma y_B). Cada chamada
+   recebe no máximo 5 s, limitados ao tempo restante, e um Cutoff de
+   incumbente-0,5 para buscar apenas soluções melhores. Itens repetidos são
+   mantidos só no primeiro recipiente; a solução é verificada e, se usar menos
+   recipientes, substitui a incumbente. O valor desse MIP serve SOMENTE como
+   incumbente (limitante superior/viabilidade): ele usa apenas as colunas já
+   geradas, por isso não prova otimalidade nem altera o limitante inferior.
+   Se a nova incumbente igualar a cota do nó, o nó é encerrado.
+
 TEMPO E LIMITAÇÕES PRÁTICAS
 
 O orçamento é medido com steady_clock desde a entrada no solver; inclui
@@ -146,8 +168,9 @@ Em erro do Gurobi, a incumbente e uma cota válida são preservadas, com aviso
 em stderr; isso não significa que a busca exata foi concluída.
 
 O grafo entre grupos ocupa memória quadrática; o banco global de colunas e
-a árvore podem crescer bastante. Não foram implementadas estabilização dual,
-heurística MIP opcional de arredondamento nem remoção de colunas antigas.
+a árvore podem crescer bastante. Não foram implementadas estabilização dual
+nem remoção de colunas antigas. A heurística de arredondamento (item 9) pode
+consumir até 5 s por chamada do orçamento total.
 Como em solvers de PL usuais, a certificação é numérica, com as tolerâncias
 acima, e não uma prova em aritmética racional exata.
 
@@ -161,23 +184,29 @@ Os testes usam um oráculo independente de programação dinâmica sobre
 subconjuntos de itens: enumeram recipientes válidos e calculam a partição
 ótima. Nenhum código do branch-and-price é reutilizado no oráculo.
 
-A suíte padrão contém 7 arquivos fixos, 120 casos aleatórios com tamanhos e
-classes, e 60 casos de coloração de grafos (187 instâncias). Todos têm UB=LB
-igual ao ótimo independente. A instância ryan_foster.txt é a junção de dois
-ciclos de cinco vértices: PL=5 e OPT=6; exige explorar a ramificação, incluindo
-os dois filhos. O relatório registra 1 ramificação e 105 chamadas de pricing
-exato no total. Também testa T=0, 0,001, 0,03 e 0,1 s, classes repetidas,
-comentários, entrada/CLI inválidas e capacidade 2^63-1.
+A suíte lê os arquivos fixos de testes/instancias/ e acrescenta 120 casos
+aleatórios com tamanhos e classes e 60 casos de coloração de grafos. Como o
+oráculo é exponencial, só entram arquivos com até 16 itens (hoje 7 dos 13:
+clique, exemplo, ryan_foster, sem_classes_pequenos, sem_conflitos,
+sobrepostas e unitario), totalizando 187 instâncias, todas com UB=LB igual
+ao ótimo independente. Os arquivos medium-1 a medium-3 e hard-1 a hard-3
+(60 a 360 itens) são pulados com aviso; servem para experimentos com
+make run. A instância ryan_foster.txt é a junção de dois ciclos de cinco
+vértices: PL=5 e OPT=6; exige explorar a ramificação, incluindo os dois
+filhos. O relatório testes/resultados.json (21/11/2026) registra
+1 ramificação e 104 chamadas de pricing exato no total. Também testa T=0,
+0,001, 0,03 e 0,1 s, classes repetidas, comentários, entrada/CLI inválidas
+e capacidade 2^63-1.
 
-Versões efetivamente usadas em 11/11/2026:
-- macOS, Apple Silicon (arm64)
-- Apple clang 17.0.0, C++17; flags -O2 -Wall -Wextra -Wpedantic
-- Gurobi Optimizer 13.0.2
-- Python 3.14.8
+O relatório testes/resultados-sanitizers.json é de 11/11/2026 (macOS, Apple
+clang 17.0.0, Gurobi 13.0.2, Python 3.14.8), anterior à heurística de
+arredondamento.
 
-Os resultados estão em testes/resultados.json. A mesma suíte foi executada
-com AddressSanitizer e UndefinedBehaviorSanitizer; relatório em
-testes/resultados-sanitizers.json.
+Versões do ambiente atual (21/11/2026):
+- Linux x86_64 (CachyOS)
+- GCC 16.2.1, C++17; flags -O2 -std=c++17 -Wall -Wextra -Wpedantic
+- Gurobi Optimizer 13.0.3 (biblioteca gurobi130)
+- Python 3.14.10
 
 Para repetir a compilação instrumentada, a partir da raiz, usando o mesmo
 GUROBI_HOME do Makefile (substitua os caminhos para a sua instalação):
@@ -190,7 +219,9 @@ GUROBI_HOME do Makefile (substitua os caminhos para a sua instalação):
 
 ENTREGA E TRANSPARÊNCIA DE IA
 
-    python3 testes/empacotar.py
+Execute na raiz do repositório.
+
+    make empacotar
 
 Gera entrega-bin-packing.zip com codigo/, testes/, ia/, docs/ e README, sem
 executáveis, objetos, bibliotecas, caches nem arquivos da instalação Gurobi.
@@ -237,7 +268,7 @@ O clang-tidy analisa o C++ e aponta problemas potenciais; o clang-format aplica
 as regras de aparência definidas em .clang-format. Os avisos e regras estão
 descritos em docs/LINT_E_FORMATACAO.md. O VS Code também foi configurado para
 analisar o código e formatar ao salvar. As ferramentas já estão instaladas
-nesta máquina (LLVM 23.1.3). Para tornar avisos do lint impeditivos:
+nesta máquina (LLVM 23.1.5). Para tornar avisos do lint impeditivos:
 
     make lint TIDYFLAGS='--warnings-as-errors=*'
 

@@ -1,8 +1,21 @@
 CXX ?= c++
 CXXFLAGS ?= -O2 -std=c++17 -Wall -Wextra -Wpedantic
-# Override on the command line or export GUROBI_HOME before calling make.
-GUROBI_HOME ?= /Library/gurobi1302/macos_universal2
-GUROBI_LIB ?= gurobi130
+# Detects Linux or macOS and the newest Gurobi installed in the default place.
+# Override on the command line or export GUROBI_HOME/GUROBI_LIB before make.
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+GUROBI_HOME ?= $(lastword $(sort $(wildcard /Library/gurobi*/macos_universal2)))
+GUROBI_LIBEXT = dylib
+else
+GUROBI_HOME ?= $(lastword $(sort $(wildcard /opt/gurobi*/linux64)))
+GUROBI_LIBEXT = so
+endif
+ifeq ($(strip $(GUROBI_HOME)),)
+$(error Gurobi nao encontrado; use make GUROBI_HOME=/caminho/da/instalacao)
+endif
+# libgurobiXYZ.(so|dylib) -> gurobiXYZ, ignoring the _light variant.
+GUROBI_LIB ?= $(patsubst lib%.$(GUROBI_LIBEXT),%,$(notdir $(lastword $(sort \
+    $(filter-out %_light.$(GUROBI_LIBEXT),$(wildcard $(GUROBI_HOME)/lib/libgurobi[0-9]*.$(GUROBI_LIBEXT)))))))
 CPPFLAGS += -I$(GUROBI_HOME)/include
 LDFLAGS += -L$(GUROBI_HOME)/lib -Wl,-rpath,$(GUROBI_HOME)/lib
 LDLIBS += -lgurobi_c++ -l$(GUROBI_LIB) -lm
@@ -30,6 +43,7 @@ clean:
 test: all
 	python3 ../testes/verificar.py --bin ./binpack
 run: binpack
+	mkdir -p "$(dir $(OUTPUT))"
 	./binpack -f "$(INPUT)" -o "$(OUTPUT)" -t "$(TIME)" -r "$(SEED)"
 lint:
 	$(CLANG_TIDY) $(TIDYFLAGS) $(SOURCES) -- $(LINTFLAGS)

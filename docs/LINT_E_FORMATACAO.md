@@ -30,7 +30,7 @@ como `-lgurobi130`, não são necessárias para essa análise.
 Para conferir manualmente um arquivo:
 
 ```bash
-clang-tidy src/branchprice.cpp -- -std=c++17 -isystem /Library/gurobi1302/macos_universal2/include
+clang-tidy src/branchprice.cpp -- -std=c++17 -isystem "$GUROBI_HOME/include"
 ```
 
 ## Regras escolhidas
