@@ -125,6 +125,10 @@ no LB global; o status do PL é classificado (prazo × numérico, com nova
 tentativa); coluna repetida e falta de par fracionário são tratadas sem
 abortar. `BNP_FAULT_NODE=k` injeta falha para teste; `verificar.py` cobre isso.
 
+Atualização de 21/11/2026 (item 3 do relatório): a FFD separa o orçamento
+macio de 5% (só entre rodadas, após a primeira) do prazo T (único que
+interrompe uma rodada). `verificar.py` testa n=3000, k=40000, T=0,1 s.
+
 ## Pedidos atendidos ao longo do chat
 
 1. Implementação e organização da entrega, preservando os originais.
@@ -194,8 +198,9 @@ nenhum commit, descarte, envio de e-mail ou publicação foi feito pelo assisten
   (dois avisos), exceção `TimeExpired` sem base `std::exception`, reserva de
   vetor, catch vazio e campo não inicializado em `binpacking.h:46`.
   Alguns comportamentos são intencionais, mas precisam ser examinados.
-- Itens abertos de `RELATORIO_BUGS.md`: 3 (orçamento da FFD), 4 (resolvido em parte: falta
-  reaproveitar o modelo entre nós), 7, 8 e 9. Os itens 1, 2, 5 e 6 foram resolvidos; o 10, em parte.
+- Itens abertos de `RELATORIO_BUGS.md`: 4 (resolvido em parte: falta
+  reaproveitar o modelo entre nós), 7, 8 e 9. Os itens 1, 2, 3, 5 e 6
+  foram resolvidos; o 10, em parte.
 - Prazo T: inicialização de licença e operações nativas são cooperativas.
   Nas medições de 21/11 o término ficou em T+0,01 s, mas não foi demonstrado
   um término rígido em T para todas as entradas, apesar do requisito literal

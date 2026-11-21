@@ -76,8 +76,11 @@ src/binpacking.h: estrutura original de entrada e solução. O cálculo da
 cota de volume e a validação de cargas foram ajustados para evitar overflow.
 
 src/binpacksolver.cpp: mantém a prioridade probabilística e o First Fit
-com conflitos fornecidos. Até 1000 rodadas, usando no máximo 5% do orçamento
-(limitado a 0,25 s), produzem a incumbente inicial. Um empacotamento unitário
+com conflitos fornecidos. Até 1000 rodadas produzem a incumbente inicial.
+Há dois limites distintos: o orçamento de 5% de T (no máximo 0,25 s) é
+"macio" e só impede uma NOVA rodada, a partir da segunda (como no template:
+pelo menos uma rodada é executada); o prazo T é o único que interrompe uma
+rodada no meio, e uma rodada interrompida é descartada. Um empacotamento unitário
 é instalado antes da heurística, inclusive para T=0. As colunas da melhor
 solução da heurística são usadas para inicializar o mestre.
 
@@ -230,6 +233,8 @@ filhos. O relatório testes/resultados.json (21/11/2026) registra
 0,001, 0,03 e 0,1 s, classes repetidas, comentários, entrada/CLI inválidas,
 capacidade 2^63-1 e injeção de falha (BNP_FAULT_NODE=1, 2 e 3 em
 ryan_foster: a busca continua, a saída é viável e LB fica abaixo de UB).
+Um caso com n=3000, k=40000 e T=0,1 s confere que a primeira rodada da FFD
+não é descartada pelo orçamento de 5% (5 ms, menor que uma rodada).
 
 O relatório testes/resultados-sanitizers.json é de 11/11/2026 (macOS, Apple
 clang 17.0.0, Gurobi 13.0.2, Python 3.14.8), anterior à heurística de

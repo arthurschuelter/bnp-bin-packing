@@ -5,7 +5,7 @@ Revisão feita em 19/11/2026 sobre o commit `371106c`, comparando o código com
 tinha sido aplicada; o texto de cada seção descreve o problema como foi
 encontrado e a sugestão de solução.
 
-**Status atualizado em 21/11/2026** (commit `41d35f3`): os itens 1, 2, 5 e 6
+**Status atualizado em 21/11/2026** (commit `41d35f3`): os itens 1, 2, 3, 5 e 6
 foram resolvidos e o 4 e o 10 foram resolvidos em parte; os demais continuam abertos.
 A coluna "Status" da tabela e a linha **Status** no início de cada seção
 registram isso. Os números de linha citados referem-se ao commit `371106c`
@@ -22,7 +22,7 @@ no **desempenho da árvore**, na **robustez** e na **configuração e documenta�
 |---|---|---|---|---|
 | 1 | Alta | A árvore é percorrida praticamente em largura e não tem heurística primal. O ótimo não é encontrado mesmo com o LB já correto. | `branchprice.cpp:37-43`, `:467-475` | Resolvido |
 | 2 | Média | Uma falha em um único nó (status do LP diferente de ótimo, exceção numérica) encerra todo o B&P. | `branchprice.cpp:378-382`, `:413`, `:466` | Resolvido |
-| 3 | Média | O orçamento da heurística FFD pode impedir até uma rodada completa, deixando só a solução unitária. | `binpacksolver.cpp:149-155` | Aberto |
+| 3 | Média | O orçamento da heurística FFD pode impedir até uma rodada completa, deixando só a solução unitária. | `binpacksolver.cpp:149-155` | Resolvido |
 | 4 | Média | O modelo é reconstruído do zero em cada nó e o pool inteiro é varrido; o método simplex escolhido é inadequado para geração de colunas. | `branchprice.cpp:330-368` | Parcial |
 | 5 | Média | Um `make` simples falha no Linux, porque o `GUROBI_HOME` padrão é o caminho do macOS. | `src/Makefile:4`, `src/compile_flags.txt` | Resolvido |
 | 6 | Baixa | Código e documentação divergem: os logs do Gurobi estão desligados, mas o README diz que estão ligados. | `branchprice.cpp:306-307`, `README:49` | Resolvido |
@@ -128,7 +128,7 @@ se perde é todo o tempo restante.
 
 ## 3. Orçamento da FFD pode deixar só a solução unitária (MÉDIA)
 
-**Status (21/11/2026):** Aberto. `RandomizedFFD` ainda para quando `elapsed >= time_limit` já na primeira rodada, e `FirstFitRound` recebe o prazo de 5%, não o global.
+**Status (21/11/2026):** Resolvido. `RandomizedFFD` recebe o orçamento (`budget`) e o prazo global (`deadline`) separados. O orçamento só é testado entre rodadas, com `round > 0`, como no template. `FirstFitRound` recebe só o prazo T. Reprodução: n = 3000, k = 40 000, `-t 0.2` gravava 3000 recipientes (solução unitária); agora grava 1067. Com `-t 0.01`, nem uma rodada cabe em T e a solução unitária continua sendo a resposta, como deve. `verificar.py` ganhou esse caso (`-t 0.1`), que falha com o binário antigo.
 
 **Problema.** `RandomizedFFD(data, 1000, min(0.25, time_limit * 0.05), start)`
 (`binpacksolver.cpp:154`). O template sempre executava **ao menos uma rodada**

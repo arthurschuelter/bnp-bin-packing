@@ -118,22 +118,24 @@ static bool FirstFitRound(const BinPackingData &data, double bias, vector<vector
 // Randomized First Fit Decreasing with conflicts. In each of at most
 // `max_rounds` rounds, a bias in [0,1] is drawn uniformly at random and used to
 // order all the items of that round. The best packing found is kept in data.
-static void RandomizedFFD(BinPackingData &data, int max_rounds, double time_limit,
-                          const chrono::steady_clock::time_point &start)
+// Two different limits: `budget` (seconds since `start`) is soft and only stops
+// the loop between rounds, after the first one, as in the supplied template;
+// `deadline` is the global time T and is the only one that aborts a round.
+static void RandomizedFFD(BinPackingData &data, int max_rounds, double budget,
+                          chrono::steady_clock::time_point start,
+                          chrono::steady_clock::time_point deadline)
 {
 	vector<vector<int>> bins;
 	for (int round = 0; round < max_rounds; round++)
 	{
 		double elapsed = chrono::duration<double>(chrono::steady_clock::now() - start).count();
-		if (elapsed >= time_limit)
-			break; // respect the initialization budget
+		if (round > 0 && elapsed >= budget)
+			break; // initialization budget, checked only after a complete round
 		if (data.best_value <= data.lower_bound)
 			break; // optimal
 		double bias = RandomUniform01();
-		if (!FirstFitRound(data, bias, bins,
-		                   start + chrono::duration_cast<chrono::steady_clock::duration>(
-		                               chrono::duration<double>(time_limit))))
-			break;
+		if (!FirstFitRound(data, bias, bins, deadline))
+			break; // global deadline T: the partial round is discarded
 		if (data.UpdateBest(bins))
 			cout << "[Heuristic: randomized FFD] round " << round + 1 << " (bias " << bias
 			     << "): " << data.best_value << " bins" << endl;
@@ -153,7 +155,7 @@ void SolveBinPacking(BinPackingData &data, double time_limit)
 		fallback.push_back({i});
 	data.UpdateBest(fallback);
 	data.lower_bound = max(data.lower_bound, data.TrivialLowerBound());
-	RandomizedFFD(data, 1000, min(0.25, time_limit * 0.05), start);
+	RandomizedFFD(data, 1000, min(0.25, time_limit * 0.05), start, deadline);
 	if (data.best_value > data.lower_bound && chrono::steady_clock::now() < deadline)
 		BranchAndPrice(data, deadline);
 

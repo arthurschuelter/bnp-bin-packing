@@ -103,7 +103,7 @@ Depois executa a heurística probabilística do código-base. Cada rodada:
 3. Ordena os itens por prioridade decrescente.
 4. Coloca cada item no primeiro recipiente em que cabe sem conflito; se não houver, abre outro.
 
-Isso produz soluções viáveis, mas não prova otimalidade. Uma rodada incompleta por falta de tempo é descartada. A heurística usa até 1000 rodadas e até `min(0,25 s; 5% de T)` para reservar orçamento à busca exata.
+Isso produz soluções viáveis, mas não prova otimalidade. A heurística usa até 1000 rodadas e o orçamento `min(0,25 s; 5% de T)` para reservar tempo à busca exata. Esse orçamento só impede começar uma nova rodada, e só depois da primeira: a primeira sempre termina, a menos que o prazo T inteiro acabe. Só o prazo T interrompe uma rodada no meio; nesse caso a rodada incompleta é descartada e fica a solução unitária. Misturar os dois limites faria uma instância grande com T pequeno começar o B&P só com colunas unitárias.
 
 O banco inicial de colunas recebe todos os recipientes unitários e os recipientes da melhor solução heurística. Se a heurística atingir `LB_0`, o ótimo já foi provado e não é necessário abrir a árvore.
 

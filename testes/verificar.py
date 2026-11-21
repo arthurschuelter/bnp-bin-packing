@@ -152,6 +152,22 @@ def main():
             assert process.returncode == 0, process.stdout + process.stderr
             check_output(output, sizes, capacity, classes, 3)
             assert time.monotonic()-begin < float(limit)+1.0
+        # The 5% heuristic budget must not discard the FIRST FFD round: with T=0.1 s
+        # the budget is 5 ms, less than one round here, but T itself is enough.
+        # The old code wrote the n singleton bins; at least one round must finish.
+        ffd_rng = random.Random(20261121)
+        n = 3000
+        sizes, capacity = [ffd_rng.randint(10, 60) for _ in range(n)], 100
+        classes = [set(ffd_rng.sample(range(n), 2)) for _ in range(40000)]
+        write_instance(instance, sizes, capacity, classes)
+        process = subprocess.run([binary, '-f', str(instance), '-o', str(output), '-t', '0.1'],
+                                 capture_output=True, text=True, timeout=10)
+        assert process.returncode == 0, process.stdout + process.stderr
+        # OPT is unknown here: only feasibility is checked (OPT := written value).
+        value = int(next(line for line in output.read_text().splitlines()
+                         if line.strip() and not line.lstrip().startswith('#')))
+        _, ub = check_output(output, sizes, capacity, classes, value)
+        assert ub < n, ('first FFD round was discarded; only singleton bins', ub)
         # Fault injection (BNP_FAULT_NODE=k fails the k-th node): the failed node is
         # parked, the search goes on with the other nodes, the output stays
         # feasible, and LB never exceeds OPT nor claims optimality (LB < UB here).
@@ -186,11 +202,11 @@ def main():
             assert subprocess.run(command,capture_output=True).returncode != 0
     report = dict(cases=len(results), skipped=skipped, branches=branch_count, exact_calls=exact_count,
                   randomized_seed=20261111, results=results,
-                  additional_checks=['timeouts', 'fault injection', 'overflow', 'duplicates', 'invalid input', 'CLI'])
+                  additional_checks=['timeouts', 'first FFD round', 'fault injection', 'overflow', 'duplicates', 'invalid input', 'CLI'])
     if args.report:
         args.report.write_text(json.dumps(report, indent=2) + '\n')
     print(f'OK: {len(results)} optima certified; {branch_count} branches; '
-          f'{exact_count} exact pricing calls; timeouts/faults/parser/overflow/CLI verified.')
+          f'{exact_count} exact pricing calls; timeouts/FFD/faults/parser/overflow/CLI verified.')
 
 
 if __name__ == '__main__':
