@@ -1,7 +1,7 @@
 # Contexto para continuar com Codex em outro computador
 
-Registro preparado em 11/11/2026. Leia este arquivo primeiro, depois o README
-e os trechos relevantes do guia de estudo. Consulte a transcrição para
+Registro preparado em 11/11/2026 e atualizado em 21/11/2026. Leia este arquivo
+primeiro, depois o README e os trechos relevantes do guia de estudo. Consulte a transcrição para
 recuperar detalhes que não cabem neste resumo.
 
 ## Objetivo do usuário
@@ -11,9 +11,9 @@ Desenvolver o Projeto 2 de Programação Linear Inteira descrito em
 O problema é Bin Packing com Classes de Conflito. O usuário também quer
 entender, verificar, estudar e padronizar o trabalho.
 
-O projeto já está implementado. O pedido mais recente é exportar o contexto
-para continuar a colaboração com Codex em outro computador. Não existe uma
-nova tarefa de implementar o algoritmo desde o início.
+O projeto já está implementado e, em 21/11/2026, estava em revisão final para
+a entrega. O trabalho continuou em Linux (CachyOS), com Codex e Claude Code.
+Não existe uma nova tarefa de implementar o algoritmo desde o início.
 
 ## O que este registro transfere
 
@@ -42,7 +42,9 @@ um arquivo garantido de importação de sessão do aplicativo.
 | `docs/GUIA_DE_ESTUDO.md` | Algoritmo, provas, exemplos, experimentos e exercícios |
 | `docs/LINT_E_FORMATACAO.md` | Uso e regras das ferramentas de lint/formatação |
 | `ai/` | Conversa exportada e estado da exportação |
-| `.vscode/` | Configuração local do IntelliSense e ferramentas |
+| `RELATORIO_BUGS.md` | Revisão de 19/11 com status de cada item (21/11) |
+| `notes.md`, `llm-problems-notes.md` | Notas de estudo e de alterações do usuário |
+| `.vscode/` | Configuração local do editor; ignorada pelo Git, pode não existir |
 | `AGENTS.md` | Instruções curtas para retomar o contexto |
 | `testes/empacotar.py` | ZIP acadêmico; converte `src` → `codigo`, `ai` → `ia` |
 | `testes/exportar_contexto.py` | ZIP de continuidade; preserva os nomes locais |
@@ -66,13 +68,20 @@ a estrutura de entrega do enunciado.
 - Duais não positivos podem ser descartados por grupo no pricing.
 - Decisões Ryan–Foster são representadas por pares juntos/separados. Union-find
   contrai os juntos. Capacidade, conflitos e restrições de separados são
-  propagados aos grupos. Colunas globais são filtradas antes de reutilização.
+  propagados aos grupos. A raiz filtra o banco global; cada filho herda as
+  colunas do mestre final do pai, filtradas só pelo par novo
+  (`Node::columns`, `inheritColumns`). O mestre usa primal simplex (`Method=0`).
 - Banco global e conjunto local evitam duplicar padrões.
 - Usa cotas de Farley com limite superior do pricing. O objetivo do mestre
   restrito sozinho não é usado como LB do nó.
-- Prioriza o menor limitante; filhos herdam o limite do pai. O nó atual fica
+- Prioriza o menor limitante; empates favorecem o nó mais profundo (`Node::depth`)
+  e depois a ordem de criação. Filhos herdam o limite do pai. O nó atual fica
   representado na fronteira até ser resolvido ou substituído por ambos filhos.
   Assim, uma interrupção não perde uma subárvore na cota global.
+- Heurística MIP de arredondamento (`roundingHeuristics`, Seção 10.6 do
+  enunciado): no nó raiz e a cada 50 nós, depois da convergência, um MIP de
+  cobertura sobre o banco global de colunas, com até 5 s e Cutoff de
+  incumbente−0,5. Só fornece incumbente; nunca entra no limitante inferior.
 - A incumbente é verificada antes de aceitar uma solução inteira; `main`
   verifica novamente antes de gravar a saída.
 
@@ -90,6 +99,26 @@ incluindo os checks da CLI. Os testes exigiram execução fora do sandbox para
 a licença reconhecer o HostID. `make lint` com esse Gurobi terminou sem erros,
 com cinco avisos nos arquivos do solver e nenhum no módulo extraído.
 
+Atualização de 21/11/2026: depois de 19/11 entraram o desempate por
+profundidade (`bff883e`), a heurística de arredondamento (`a9ce601`), novas
+instâncias `medium-1..3` e `hard-1..3` (60 a 360 itens; acima do limite de 16
+itens do oráculo, por isso ficam fora da suíte), logs e o registro das
+conversas com Claude Code em `ai/`. O Makefile passou a detectar Linux/macOS
+e o Gurobi instalado. Verificações de 21/11 neste Linux:
+`make format-check` passou; `make test` deu `OK: 187 optima certified`
+(1 ramificação, 104 chamadas de pricing exato); `make lint` mostrou 6 avisos
+e nenhum erro; hard-1, hard-2, hard-3 e medium-3 com `-t 3` terminaram em
+3,00–3,01 s de tempo real, com saídas viáveis.
+
+Atualização de 21/11/2026 (item 4 do relatório, parte 1): primal simplex no
+mestre e herança das colunas do pai em vez de varrer o banco a cada nó.
+`make test` e a rodada `--random 500` passaram (187 e 567 ótimos), mas nelas
+só há uma ramificação. Um estresse à parte, com 60 instâncias geradas para
+ramificar (variações de Grötzsch e grafos densos, até 16 itens), teve 119
+ramificações e todas as saídas com UB=LB=OPT do oráculo `--exato`.
+medium-3 com `-t 30` provou o ótimo em 2,6 s e 1,4 s (sementes 1 e 2),
+contra 4,4 s e 2,2 s antes. O modelo ainda é recriado em cada nó.
+
 ## Pedidos atendidos ao longo do chat
 
 1. Implementação e organização da entrega, preservando os originais.
@@ -102,6 +131,8 @@ com cinco avisos nos arquivos do solver e nenhum no módulo extraído.
 6. Integração clang-tidy/clang-format e formatação dos fontes ativos.
    VS Code analisa automaticamente e formata ao salvar C++.
 7. Exportação de contexto, instruções de continuidade e pacote portátil.
+8. Revisão de bugs (`RELATORIO_BUGS.md`), desempate por profundidade,
+   heurística de arredondamento, Makefile portátil e novas instâncias.
 
 ## Comandos disponíveis na raiz
 
@@ -120,8 +151,9 @@ python3 testes/exportar_contexto.py
 ```
 
 `INPUT` e `OUTPUT` são interpretados a partir de `src/`, pois o Makefile da
-raiz encaminha os alvos. Padrões: exemplo, saída `../saida.txt`, 60 segundos,
-semente 1. No ZIP acadêmico extraído, use `make -C codigo ...`.
+raiz encaminha os alvos. Padrões: `TEST_FILE=medium-1`, entrada
+`../testes/instancias/$(TEST_FILE).txt`, saída `../tests-results/$(TEST_FILE).txt`,
+60 segundos, semente 1. `make empacotar` gera o ZIP acadêmico. No ZIP acadêmico extraído, use `make -C codigo ...`.
 
 ## Evidências já obtidas
 
@@ -129,14 +161,16 @@ semente 1. No ZIP acadêmico extraído, use `make -C codigo ...`.
 - Caso `ryan_foster.txt`: junção de dois ciclos C5, LP=5 e OPT=6. A execução
   validada processou três nós e uma ramificação, exercitando os dois filhos.
 - Suíte padrão: 187 instâncias comparadas com ótimo por DP independente;
-  todas com UB=LB=OPT, uma ramificação e 105 chamadas de pricing exato.
+  todas com UB=LB=OPT, uma ramificação e 104 chamadas de pricing exato
+  (21/11/2026; eram 105 em 11/11).
 - Rodada ampliada: 567 instâncias, todas com valores corretos; 255 chamadas
   de pricing exato. Relatório em `testes/resultados-ampliados.json`.
 - Suíte original de 187 executada também com ASan/UBSan, sem erros reportados;
-  isso foi antes da última formatação. Não afirmar uma nova execução
+  isso foi em 11/11, antes do desempate por profundidade e da heurística de
+  arredondamento. Não afirmar uma nova execução
   instrumentada para mudanças posteriores sem realizá-la.
 - Após a formatação mais recente, `make format-check` e `make test` passaram.
-- Último `make lint`: dez avisos no código, sem erros de análise. Não foram
+- Último `make lint` (21/11/2026): seis avisos no código, sem erros de análise. Não foram
   aplicados `--fix` automáticos. O retorno normal de lint não falha por aviso;
   para exigir isso: `make lint TIDYFLAGS='--warnings-as-errors=*'`.
 - Verificador externo rejeitou um item duplicado e LB adulterado maior que OPT.
@@ -150,35 +184,48 @@ nenhum commit, descarte, envio de e-mail ou publicação foi feito pelo assisten
 
 ## Pendências e limites conhecidos
 
-- Dez avisos de clang-tidy para revisão: gerador estático/semente constante,
-  exceção `TimeExpired` sem base `std::exception`, conversões para long double,
-  reserva de vetor, catch vazio e possível escape de exceção em main.
+- Seis avisos de clang-tidy para revisão: `rng` estático com semente constante
+  (dois avisos), exceção `TimeExpired` sem base `std::exception`, reserva de
+  vetor, catch vazio e campo não inicializado em `binpacking.h:46`.
   Alguns comportamentos são intencionais, mas precisam ser examinados.
+- Itens abertos de `RELATORIO_BUGS.md`: 2 (status do PL diferente de ótimo
+  encerra todo o B&P), 3 (orçamento da FFD), 4 (resolvido em parte: falta
+  reaproveitar o modelo entre nós), 7, 8 e 9. Os itens 1, 5 e 6 foram resolvidos; o 10, em parte.
 - Prazo T: inicialização de licença e operações nativas são cooperativas.
-  Os testes aceitam folga temporal; não foi demonstrado um término rígido
-  em T para todas as entradas, apesar do requisito literal do PDF.
+  Nas medições de 21/11 o término ficou em T+0,01 s, mas não foi demonstrado
+  um término rígido em T para todas as entradas, apesar do requisito literal
+  do PDF.
+- Instâncias grandes podem terminar com lacuna (por exemplo hard-3 com `-t 5`:
+  LB=110, UB=118). A solução é viável, mas a otimalidade não foi certificada.
 - Certificação numérica com tolerâncias, não aritmética racional exata.
 - Cobertura limitada de árvores profundas e sem teste isolado de cada pricing.
 - Grafo de grupos usa memória quadrática; pricing e árvore têm pior caso
-  exponencial. Sem estabilização dual, coleta de colunas ou MIP de arredondamento.
+  exponencial. Sem estabilização dual nem remoção de colunas antigas.
 - Entrega individual exige domínio do aluno e conversas completas de IA.
+  Cada nova sessão (Codex ou Claude Code) precisa ser exportada para `ai/`,
+  registrada em `ai/README`, e o ZIP precisa ser gerado de novo.
   O pacote foi preparado localmente; não foi enviado ao professor.
 
 ## Configurar no próximo computador
 
-O ambiente anterior era macOS Apple Silicon, Apple clang 17.0.0, Gurobi 13.0.2,
-Python 3.14.8 e LLVM 23.1.3 para lint/formatação. São versões registradas,
+Ambiente atual (21/11/2026): Linux x86_64 (CachyOS), GCC 16.2.1,
+Gurobi 13.0.3 em `/opt/gurobi1303/linux64` (biblioteca `gurobi130`),
+Python 3.14.10 e LLVM 23.1.5 (`/usr/bin/clang-format`, `/usr/bin/clang-tidy`).
+O ambiente original (11/11) era macOS Apple Silicon, Apple clang 17.0.0,
+Gurobi 13.0.2, Python 3.14.8 e LLVM 23.1.3. São versões registradas,
 não uma obrigação de usar exatamente as mesmas, exceto se desejar reprodução
 estrita da formatação e diagnósticos.
 
 1. Extraia `contexto-codex.zip` em uma pasta e abra a raiz no Codex/VS Code.
 2. Instale/configure compilador C++17, Make, Python 3 e Gurobi/licença local.
-3. Ajuste `GUROBI_HOME` e `GUROBI_LIB` em `src/Makefile` ou na linha de comando.
-   O caminho antigo era `/Library/gurobi1302/macos_universal2` e `gurobi130`.
-4. Ajuste `.vscode/c_cpp_properties.json`: compilador, arquitetura e includePath.
-   A configuração atual usa `/usr/bin/clang++` e `macos-clang-arm64`.
-5. Ajuste os executáveis em `.vscode/settings.json`; os antigos estavam em
-   `/opt/homebrew/opt/llvm/bin/`. Não use esses caminhos num Linux/Windows.
+3. `src/Makefile` detecta Linux/macOS e usa o Gurobi mais recente em
+   `/opt/gurobi*/linux64` ou `/Library/gurobi*/macos_universal2`. Para outro
+   local, passe `GUROBI_HOME=...` (e, se preciso, `GUROBI_LIB=...`) ao make.
+4. Se usar VS Code, ajuste `.vscode/c_cpp_properties.json` (compilador,
+   arquitetura e includePath do Gurobi). A pasta `.vscode/` é ignorada pelo
+   Git; a versão do Mac usava `/usr/bin/clang++` e `macos-clang-arm64`.
+5. Ajuste os executáveis do clang em `.vscode/settings.json`; no Mac estavam
+   em `/opt/homebrew/opt/llvm/bin/`, no Linux atual em `/usr/bin/`.
 6. Rode `make`, `make test` e `make format-check` para validar o novo ambiente.
 7. Inicie uma conversa com o prompt abaixo e continue a tarefa desejada.
 

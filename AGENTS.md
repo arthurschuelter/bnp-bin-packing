@@ -17,5 +17,6 @@ O código e o enunciado têm precedência sobre resumos que possam estar antigos
 - Use `.clang-format` e `.clang-tidy`. Após mudanças em C++, execute
   `make format-check` e `make test`; interprete os avisos de `make lint`.
 - Confira a instalação local antes de reutilizar caminhos de Gurobi, LLVM
-  ou VS Code. Os caminhos salvos foram configurados para um Mac Apple Silicon.
+  ou VS Code. O Makefile detecta Linux/macOS; o ambiente atual é Linux com
+  Gurobi em `/opt/gurobi1303/linux64`, e a configuração original era de um Mac.
 - Há alterações locais, inclusive staged e unstaged. Não as descarte.

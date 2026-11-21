@@ -8,6 +8,7 @@
 #include <functional>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <numeric>
 #include <queue>
 #include <random>
@@ -18,6 +19,8 @@ namespace
 {
 using Clock = std::chrono::steady_clock;
 using Pattern = std::vector<int>;
+// Columns of the global pool (std::set nodes have stable addresses).
+using ColumnList = std::vector<const Pattern *>;
 constexpr double RC_EPS = 1e-7;
 constexpr double INT_EPS = 1e-6;
 struct TimeExpired
@@ -35,7 +38,27 @@ struct Node
 	int bound;
 	int depth = 0;
 	unsigned long long id;
+	// Columns inherited from the parent's master, already filtered by the new
+	// Ryan-Foster decision. nullptr (root) means: scan the whole global pool.
+	std::shared_ptr<const ColumnList> columns;
 };
+
+// Keeps the columns of the parent compatible with the decision on {i, j}.
+// They already satisfy every older decision, so only the new pair is tested.
+std::shared_ptr<const ColumnList> inheritColumns(const ColumnList &parent, int i, int j,
+                                                 bool together)
+{
+	auto child = std::make_shared<ColumnList>();
+	child->reserve(parent.size());
+	for (const Pattern *p : parent)
+	{
+		const bool has_i = std::binary_search(p->begin(), p->end(), i);
+		const bool has_j = std::binary_search(p->begin(), p->end(), j);
+		if (together ? has_i == has_j : !(has_i && has_j))
+			child->push_back(p);
+	}
+	return child;
+}
 struct BestBound
 {
 	bool operator()(const Node &a, const Node &b) const
@@ -346,7 +369,7 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 	std::cout << "Starting Branch-and-Price\n";
 	std::priority_queue<Node, std::vector<Node>, BestBound> open;
 	unsigned long long next_id = 1;
-	open.push(Node{{}, {}, data.lower_bound, 0, 0});
+	open.push(Node{{}, {}, data.lower_bound, 0, 0, nullptr});
 	std::set<Pattern> pool;
 	for (int i = 1; i <= data.n; ++i)
 		pool.insert({i});
@@ -389,7 +412,9 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 			}
 			GRBModel model(env);
 			model.setCallback(&callback);
-			model.set(GRB_IntParam_Method, 1); // dual simplex; incremental columns
+			// Primal simplex: a new column keeps the previous basis primal feasible
+			// (it enters at zero), so the column-generation loop reuses the basis.
+			model.set(GRB_IntParam_Method, 0);
 			model.set(GRB_DoubleParam_FeasibilityTol, 1e-9);
 			model.set(GRB_DoubleParam_OptimalityTol, 1e-9);
 			std::vector<GRBConstr> rows;
@@ -399,6 +424,7 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 			std::set<Pattern> local;
 			std::vector<Pattern> patterns;
 			std::vector<GRBVar> vars;
+			ColumnList master; // pool entries of this master, in the order of vars
 			auto add = [&](Pattern p)
 			{
 				std::sort(p.begin(), p.end());
@@ -409,7 +435,7 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 					column.addTerm(1.0, rows[g]);
 				vars.push_back(model.addVar(0.0, GRB_INFINITY, 1.0, GRB_CONTINUOUS, column));
 				patterns.push_back(p);
-				pool.insert(groups.expand(p));
+				master.push_back(&*pool.insert(groups.expand(p)).first);
 				return true;
 			};
 			for (size_t g = 0; g < groups.items.size(); ++g)
@@ -417,13 +443,20 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 				checkTime(deadline);
 				add({static_cast<int>(g)});
 			}
-			// Snapshot: adding a column also inserts its expansion into the pool.
-			std::vector<Pattern> snapshot(pool.begin(), pool.end());
-			for (const auto &p : snapshot)
+			// The root scans the global pool; any other node starts from the parent's
+			// master filtered by its decision (Lemma 8: a child only loses columns).
+			// Any admissible subset is valid here: the exact pricing certifies the bound.
+			ColumnList candidates;
+			if (node.columns)
+				candidates = *node.columns;
+			else
+				for (const auto &p : pool)
+					candidates.push_back(&p);
+			for (const Pattern *p : candidates)
 			{
 				checkTime(deadline);
 				Pattern q;
-				if (groups.admissible(p, q))
+				if (groups.admissible(*p, q))
 					add(q);
 			}
 			bool solved = false, stopped = false, branched = false;
@@ -546,10 +579,12 @@ void BranchAndPrice(BinPackingData &data, Clock::time_point deadline)
 				together.together.emplace_back(i, j);
 				together.id = next_id++;
 				together.depth = node.depth + 1;
+				together.columns = inheritColumns(master, i, j, true);
 
 				apart.apart.emplace_back(i, j);
 				apart.id = next_id++;
 				apart.depth = node.depth + 1;
+				apart.columns = inheritColumns(master, i, j, false);
 
 				open.pop();
 				open.push(std::move(together));

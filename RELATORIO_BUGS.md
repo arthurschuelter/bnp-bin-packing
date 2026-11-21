@@ -1,8 +1,15 @@
 # Relatório de problemas do código (`src/`)
 
 Revisão feita em 19/11/2026 sobre o commit `371106c`, comparando o código com
-`enunciado.pdf` e `projeto-template/`. Nenhuma correção foi aplicada; este
-arquivo só descreve os problemas e como resolvê-los.
+`enunciado.pdf` e `projeto-template/`. Na data da revisão nenhuma correção
+tinha sido aplicada; o texto de cada seção descreve o problema como foi
+encontrado e a sugestão de solução.
+
+**Status atualizado em 21/11/2026** (commit `41d35f3`): os itens 1, 5 e 6
+foram resolvidos e o 4 e o 10 foram resolvidos em parte; os demais continuam abertos.
+A coluna "Status" da tabela e a linha **Status** no início de cada seção
+registram isso. Os números de linha citados referem-se ao commit `371106c`
+e não correspondem mais ao código atual.
 
 ## Resumo
 
@@ -11,22 +18,24 @@ o limitante inferior está certificado (Farley + pricing exato) e as decisões
 de Ryan–Foster estão modeladas corretamente com grupos. Os problemas reais estão
 no **desempenho da árvore**, na **robustez** e na **configuração e documentação**.
 
-| # | Severidade | Problema | Onde |
-|---|---|---|---|
-| 1 | Alta | A árvore é percorrida praticamente em largura e não tem heurística primal. O ótimo não é encontrado mesmo com o LB já correto. | `branchprice.cpp:37-43`, `:467-475` |
-| 2 | Média | Uma falha em um único nó (status do LP diferente de ótimo, exceção numérica) encerra todo o B&P. | `branchprice.cpp:378-382`, `:413`, `:466` |
-| 3 | Média | O orçamento da heurística FFD pode impedir até uma rodada completa, deixando só a solução unitária. | `binpacksolver.cpp:149-155` |
-| 4 | Média | O modelo é reconstruído do zero em cada nó e o pool inteiro é varrido; o método simplex escolhido é inadequado para geração de colunas. | `branchprice.cpp:330-368` |
-| 5 | Média | Um `make` simples falha no Linux, porque o `GUROBI_HOME` padrão é o caminho do macOS. | `src/Makefile:4`, `src/compile_flags.txt` |
-| 6 | Baixa | Código e documentação divergem: os logs do Gurobi estão desligados, mas o README diz que estão ligados. | `branchprice.cpp:306-307`, `README:49` |
-| 7 | Baixa | A FFD usa memória O(k) por recipiente. | `binpacksolver.cpp:94` |
-| 8 | Baixa | `-t` perto do máximo do `steady_clock` pode estourar o cálculo do prazo. | `commandline.cpp:36-44`, `binpacksolver.cpp:146` |
-| 9 | Baixa | Ineficiências do pricing (uma coluna por chamada exata, relógio consultado em todo nó da DFS). | `branchprice.cpp:186-224`, `:82-84` |
-| 10 | Baixa | Higiene do código e avisos do lint. | vários |
+| # | Severidade | Problema | Onde (em `371106c`) | Status |
+|---|---|---|---|---|
+| 1 | Alta | A árvore é percorrida praticamente em largura e não tem heurística primal. O ótimo não é encontrado mesmo com o LB já correto. | `branchprice.cpp:37-43`, `:467-475` | Resolvido |
+| 2 | Média | Uma falha em um único nó (status do LP diferente de ótimo, exceção numérica) encerra todo o B&P. | `branchprice.cpp:378-382`, `:413`, `:466` | Aberto |
+| 3 | Média | O orçamento da heurística FFD pode impedir até uma rodada completa, deixando só a solução unitária. | `binpacksolver.cpp:149-155` | Aberto |
+| 4 | Média | O modelo é reconstruído do zero em cada nó e o pool inteiro é varrido; o método simplex escolhido é inadequado para geração de colunas. | `branchprice.cpp:330-368` | Parcial |
+| 5 | Média | Um `make` simples falha no Linux, porque o `GUROBI_HOME` padrão é o caminho do macOS. | `src/Makefile:4`, `src/compile_flags.txt` | Resolvido |
+| 6 | Baixa | Código e documentação divergem: os logs do Gurobi estão desligados, mas o README diz que estão ligados. | `branchprice.cpp:306-307`, `README:49` | Resolvido |
+| 7 | Baixa | A FFD usa memória O(k) por recipiente. | `binpacksolver.cpp:94` | Aberto |
+| 8 | Baixa | `-t` perto do máximo do `steady_clock` pode estourar o cálculo do prazo. | `commandline.cpp:36-44`, `binpacksolver.cpp:146` | Aberto |
+| 9 | Baixa | Ineficiências do pricing (uma coluna por chamada exata, relógio consultado em todo nó da DFS). | `branchprice.cpp:186-224`, `:82-84` | Aberto |
+| 10 | Baixa | Higiene do código e avisos do lint. | vários | Parcial |
 
 ---
 
 ## 1. Busca em largura sem heurística primal (ALTA)
+
+**Status (21/11/2026):** Resolvido. `Node` ganhou `depth` e o comparador `BestBound` desempata pelo nó mais profundo (commit `bff883e`). A heurística MIP de arredondamento `roundingHeuristics` roda no nó raiz e a cada 50 nós, depois da convergência da geração de colunas (commit `a9ce601`; README, item 9).
 
 **Problema.** A fila de prioridade ordena por `bound` e, em caso de empate, por
 `id` crescente (`BestBound`, `branchprice.cpp:37-43`). Como os limitantes são
@@ -90,6 +99,8 @@ não detecta isso, porque as instâncias dela são pequenas.
 
 ## 2. Uma falha local aborta todo o B&P (MÉDIA)
 
+**Status (21/11/2026):** Aberto. Um status diferente de `GRB_OPTIMAL` ainda marca `stopped` e encerra a busca. Os erros "pricing repeated" e "no fractional Ryan-Foster pair" ainda saem do B&P. O LB devolvido continua válido.
+
 **Problema.** Três situações terminam a busca inteira, e não só o nó atual:
 
 - `model.get(GRB_IntAttr_Status) != GRB_OPTIMAL` → `stopped = true` → `break`
@@ -117,6 +128,8 @@ se perde é todo o tempo restante.
 
 ## 3. Orçamento da FFD pode deixar só a solução unitária (MÉDIA)
 
+**Status (21/11/2026):** Aberto. `RandomizedFFD` ainda para quando `elapsed >= time_limit` já na primeira rodada, e `FirstFitRound` recebe o prazo de 5%, não o global.
+
 **Problema.** `RandomizedFFD(data, 1000, min(0.25, time_limit * 0.05), start)`
 (`binpacksolver.cpp:154`). O template sempre executava **ao menos uma rodada**
 (`round > 0 && elapsed >= time_limit`). A versão atual não tem essa garantia.
@@ -137,6 +150,8 @@ if (round > 0 && elapsed >= heuristic_budget) break;
 
 ## 4. Reconstrução do modelo a cada nó e escolha do simplex (MÉDIA, desempenho)
 
+**Status (21/11/2026):** Parcial. O mestre usa `Method = 0` (primal simplex). Cada filho herda as colunas do mestre final do pai (`Node::columns`), filtradas só pelo par novo em `inheritColumns`; só a raiz varre o banco global. Continua aberto: o `GRBModel` ainda é recriado em cada nó. Medição: medium-3 com `-t 30` provou o ótimo em 2,6 s e 1,4 s (sementes 1 e 2), contra 4,4 s e 2,2 s antes. Na raiz de hard-1, com `-t 5`, foram 619 PLs contra 533. Em 60 instâncias de até 16 itens geradas para ramificar (119 ramificações), todas as saídas tiveram UB = LB = ótimo do oráculo independente.
+
 **Problema.**
 - Cada nó cria um `GRBModel` novo, adiciona n linhas e varre **todo** o
   `pool` (cópia em `snapshot` + `admissible`, que custa O(nº de grupos) por
@@ -154,6 +169,8 @@ if (round > 0 && elapsed >= heuristic_budget) break;
 - Pré-aloque `rows`/`vars` (`reserve`), como o lint sugere.
 
 ## 5. `make` padrão falha no Linux (MÉDIA, ambiente)
+
+**Status (21/11/2026):** Resolvido. `src/Makefile` detecta o sistema por `uname` e escolhe a instalação mais recente em `/opt/gurobi*/linux64` ou `/Library/gurobi*/macos_universal2`. O nome da biblioteca é deduzido de `$(GUROBI_HOME)/lib`.
 
 **Problema.** `src/Makefile:4` define
 `GUROBI_HOME ?= /Library/gurobi1302/macos_universal2` (caminho do Mac). Neste
@@ -175,6 +192,8 @@ Atualize também `AGENTS.md` e `CONTEXTO_CODEX.md`, que dizem que os caminhos
 
 ## 6. Logs do Gurobi: código ≠ documentação (BAIXA)
 
+**Status (21/11/2026):** Resolvido. `OutputFlag = 1`, como dizem o README e o contexto. A linha comentada com `OutputFlag = 0` continua no código como alternativa.
+
 `branchprice.cpp:306` usa `OutputFlag = 0` (a linha com `1` está comentada).
 `README:49` e `docs/CONTEXTO_CODEX.md:99` afirmam que os logs estão ligados
 (`OutputFlag=1`), um pedido explícito anterior. Escolha um dos dois e alinhe.
@@ -182,6 +201,8 @@ Uma sugestão é uma flag `-v` na CLI ou uma variável de ambiente, e remover a
 linha comentada.
 
 ## 7. Memória da FFD com muitas classes (BAIXA)
+
+**Status (21/11/2026):** Aberto. A FFD ainda aloca `vector<char>(data.k)` por recipiente.
 
 `used.push_back(vector<char>(data.k, 0))` (`binpacksolver.cpp:94`) aloca k bytes
 **por recipiente aberto**, em toda rodada. Em instâncias que codificam o grafo
@@ -195,6 +216,8 @@ um vetor `mark[t]` reutilizado (carimbo com o índice do recipiente), ou mantenh
 
 ## 8. Estouro no cálculo do prazo com `-t` enorme (BAIXA)
 
+**Status (21/11/2026):** Aberto. Não há teto para T nem saturação do prazo.
+
 `ParseCommandLine` aceita `T < max_seconds`, calculado com o `now()` **do
 parse**. Depois, `SolveBinPacking` calcula
 `start + duration_cast<steady_clock::duration>(duration<double>(T))` com um
@@ -205,6 +228,8 @@ generoso, como `1e9` s, ou calcule o prazo uma única vez, saturando em
 `time_point::max()`.
 
 ## 9. Ineficiências no pricing (BAIXA)
+
+**Status (21/11/2026):** Aberto.
 
 - `Pricing::dfs` chama `Clock::now()` em **todo** nó da enumeração, e
   `Groups::forbid` chama `checkTime` para cada par de cada classe (O(Σ|S_t|²)
@@ -217,6 +242,8 @@ generoso, como `1e9` s, ou calcule o prazo uma única vez, saturando em
   `best`, e isso está correto.
 
 ## 10. Higiene e lint (BAIXA)
+
+**Status (21/11/2026):** Parcial. `#include <chrono>` foi adicionado, `HasSolution()` passou a ser usada em `main.cpp`, e o comentário de dúvida saiu do código. Continuam: `rng` estático com semente constante, `TimeExpired` sem base `std::exception`, `catch` vazio e falta de `reserve`. Em 21/11/2026, `make lint` mostrou 6 avisos, entre eles um novo em `binpacking.h:46` (campo não inicializado no construtor).
 
 `make format-check` passa. `make lint` mostra 5 avisos:
 - `TimeExpired` não deriva de `std::exception`; `catch (const TimeExpired &) {}`

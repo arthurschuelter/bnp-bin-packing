@@ -86,8 +86,10 @@ src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
 1. Formulação: min soma_B x_B, soma_{B contendo i} x_B = 1 para cada item.
    O algoritmo resolve relaxações com x_B >= 0. O mestre restrito tem somente
    variáveis CONTÍNUAS (é um PL); o único MIP é a heurística de arredondamento
-   do item 9, que não participa dos limitantes. O solver do mestre usa dual
-   simplex, uma thread, tolerâncias primal/dual 1e-9 e reotimização incremental.
+   do item 9, que não participa dos limitantes. O solver do mestre usa primal
+   simplex, uma thread, tolerâncias primal/dual 1e-9 e reotimização incremental:
+   uma coluna nova entra com valor zero, então a base anterior continua primal
+   viável e o primal simplex parte dela.
 
 2. Grupos: componentes das decisões "juntos" são contraídas por union-find.
    Tamanhos são somados e conflitos originais/decisões "separados" são
@@ -96,9 +98,17 @@ src/branchprice.cpp: árvore, grupos, mestre, pricing e certificação.
    sozinho garante viabilidade, sem artificiais nem penalizações Big-M.
 
 3. Colunas: banco global de conjuntos ordenados de itens, sem duplicatas.
-   Cada nó reutiliza apenas colunas que incluem os grupos por inteiro e
-   respeitam seus conflitos. Acrescenta também as colunas unitárias dos
-   grupos. Um conjunto local evita duplicar colunas no mesmo mestre.
+   A raiz varre o banco inteiro. Os demais nós partem das colunas do mestre
+   final do pai (Node::columns, um shared_ptr para ponteiros do banco), já
+   filtradas pela decisão nova em inheritColumns: "juntos" mantém as colunas
+   com os dois itens ou nenhum; "separados" remove as que têm os dois. As
+   decisões antigas já valiam no pai (Lema 8: o filho só perde colunas), então
+   não é preciso varrer o banco a cada nó. Colunas geradas em outros ramos não
+   são herdadas; se forem úteis, o pricing exato as gera de novo, e por isso
+   o limitante certificado não muda. Cada coluna herdada ainda passa por
+   Groups::admissible para virar um padrão de grupos. Acrescenta também as
+   colunas unitárias dos grupos. Um conjunto local evita duplicar colunas no
+   mesmo mestre.
 
 4. Pricing heurístico PRIMEIRO: 12 ordens gulosas, usando valor dual/tamanho,
    valor dual e embaralhamentos. Grupos com dual positivo são inseridos se

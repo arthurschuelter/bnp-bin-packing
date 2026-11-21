@@ -90,7 +90,7 @@ O número de recipientes válidos pode ser exponencial em `n`. Armazenar todos a
 
 Para obter uma relaxação linear, substituímos as condições binárias por `x_B >= 0`. Não é necessário impor `x_B <= 1`: como cada coluna contém pelo menos um item, sua igualdade de cobertura já implica esse limite.
 
-**Papel do Gurobi:** resolver os PLs com as colunas disponíveis. A árvore, o pricing e a ramificação são implementados pelo programa. Em `branchprice.cpp`, a criação de variáveis usa `GRB_CONTINUOUS`. O pricing exato desta implementação também não usa MIP.
+**Papel do Gurobi:** resolver os PLs com as colunas disponíveis. A árvore, o pricing e a ramificação são implementados pelo programa. Em `branchprice.cpp`, a criação de variáveis usa `GRB_CONTINUOUS`. O pricing exato desta implementação também não usa MIP. A única exceção é a heurística de arredondamento opcional da Seção 10.6 do enunciado (`roundingHeuristics`): no nó raiz e a cada 50 nós, depois da convergência, um MIP com limite de 5 s sobre as colunas já geradas procura uma incumbente melhor. Esse MIP só pode melhorar o limitante superior (viabilidade); ele nunca entra no limitante inferior nem na prova de otimalidade.
 
 ## 4. Como começa a busca
 
@@ -106,6 +106,10 @@ Depois executa a heurística probabilística do código-base. Cada rodada:
 Isso produz soluções viáveis, mas não prova otimalidade. Uma rodada incompleta por falta de tempo é descartada. A heurística usa até 1000 rodadas e até `min(0,25 s; 5% de T)` para reservar orçamento à busca exata.
 
 O banco inicial de colunas recebe todos os recipientes unitários e os recipientes da melhor solução heurística. Se a heurística atingir `LB_0`, o ótimo já foi provado e não é necessário abrir a árvore.
+
+**Que colunas cada nó recebe.** A raiz começa com o banco inteiro. Um filho começa com as colunas do mestre final do pai, filtradas só pela decisão nova sobre o par `{i, j}` (`inheritColumns`): no ramo "juntos" ficam as colunas que têm os dois itens ou nenhum; no ramo "separados" saem as que têm os dois. Basta testar o par novo porque as colunas do pai já respeitavam todas as decisões anteriores, e um filho só perde colunas (Lema 8). Isso evita varrer o banco global a cada nó. Qualquer subconjunto de colunas admissíveis que contenha os unitários dos grupos é um mestre inicial válido: o limitante só é aceito depois que o pricing exato o certifica, e uma coluna útil que ficou de fora é gerada de novo.
+
+**Por que primal simplex.** Uma coluna nova entra no PL com valor zero, fora da base. A solução anterior continua primal viável, e só a otimalidade se perde (a coluna tem custo reduzido negativo). O primal simplex continua dessa base com poucos pivôs; o dual simplex precisaria de uma base dual viável, que a coluna nova acabou de destruir. Por isso `Method = 0` no mestre. O dual simplex seria a escolha natural depois de mudar limites de variáveis, o que esta implementação não faz, porque cria um modelo novo por nó.
 
 ## 5. Mestre restrito, dual e custo reduzido
 
@@ -422,7 +426,7 @@ Tente responder antes de ler as respostas.
 
 ## 16. Limitações para explicar na apresentação
 
-O método é exato no modelo combinatório, com implementação numérica sujeita às tolerâncias do PL e do pricing. A enumeração do pricing e a árvore são exponenciais no pior caso. A matriz de conflitos dos grupos ocupa memória quadrática; o banco de colunas pode crescer. Não há estabilização dual nem heurística MIP opcional.
+O método é exato no modelo combinatório, com implementação numérica sujeita às tolerâncias do PL e do pricing. A enumeração do pricing e a árvore são exponenciais no pior caso. A matriz de conflitos dos grupos ocupa memória quadrática; o banco de colunas pode crescer. Não há estabilização dual. A heurística MIP de arredondamento (opcional no enunciado) está implementada, mas só usa as colunas já geradas: ela pode encontrar uma incumbente melhor, não certifica otimalidade e consome até 5 s do orçamento T por chamada.
 
 O tempo usa `steady_clock`, limite restante no Gurobi e callback, mas inicialização de licença, chamadas nativas e escalonamento podem ultrapassar o prazo. Os testes atuais não provam o requisito literal de término rígido em T; essa é uma limitação explícita para uma avaliação estrita do enunciado.
 
